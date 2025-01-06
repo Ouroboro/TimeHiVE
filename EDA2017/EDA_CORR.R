@@ -5,19 +5,27 @@ library(Kendall)
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 # Data upload from SerieX.txt
-serie <- scan("SerieT.txt")
-serie2 <- scan("SerieR.txt")
+serie <- scan("SerieP1.txt")
+serie2 <- scan("SerieP2.txt")
 n <- length(serie)
 n2 <- length(serie2)
 
 # Creation of lists for x_values and y_values
 x_values <- c()
 y_values <- c()
-m = 3 # 1 = NO SUBSAMPLE; > 1 Scale MUST BE AN INTEGER > 1
+m = 1 # 1 = NO SUBSAMPLE; > 1 Scale MUST BE AN INTEGER > 1
+s = 6
+
+# SAFEGUARD FOR VERY LONG SERIES
+if (n > 250){
+  m = ceiling(n/200)
+  s = max(s, m)
+}
+
 scale <- 200 / n * m
 
 # Generation of x_values and y_values
-for (len in seq(6, n, by = m)) {
+for (len in seq(s, n, by = m)) {
   
   for (y in seq(len/2, n-len/2, by = m)) {
     centro <- y
@@ -28,7 +36,7 @@ for (len in seq(6, n, by = m)) {
 LEN_MAX <- length(x_values)
 
 # Creation of an empty matrix to store the results
-results <- matrix(NA, ncol = 7, nrow = LEN_MAX)
+results <- matrix(NA, ncol = 8, nrow = LEN_MAX)
 
 # Loop to populate the matrix
 for (ind in 1:LEN_MAX) {
@@ -41,17 +49,43 @@ for (ind in 1:LEN_MAX) {
     sottoserie <- serie[start:end]
     sottoserie2 <- serie2[start:end]
     
-    if (length(sottoserie) < 6) next
+    if (length(sottoserie) < 112) next
+    
+    # Rimuovo gli NA in entrambe le sottoserie, rimuovendo i corrispondenti nelle due serie
+    validi_indices <- complete.cases(sottoserie, sottoserie2)
+    
+    # Filtra le sottoserie
+    sottoserie <- sottoserie[validi_indices]
+    sottoserie2 <- sottoserie2[validi_indices]
 
     # Populate and convert the matrix in a dataframe
+    # Calcolare la correlazione Pearson e Kendall con tryCatch
+    pearson_cor <- tryCatch({
+      cor.test(sottoserie, sottoserie2, method = "pearson", use = "complete.obs")$estimate
+    }, error = function(e) NA)
+    
+    pearson_pvalue <- tryCatch({
+      cor.test(sottoserie, sottoserie2, method = "pearson", use = "complete.obs")$p.value
+    }, error = function(e) NA)
+    
+    kendall_cor <- tryCatch({
+      cor.test(sottoserie, sottoserie2, method = "kendall", use = "complete.obs")$estimate
+    }, error = function(e) NA)
+    
+    kendall_pvalue <- tryCatch({
+      cor.test(sottoserie, sottoserie2, method = "kendall", use = "complete.obs")$p.value
+    }, error = function(e) NA)
+    
+    # Popolare la matrice con i risultati
     results[ind, 1] <- centro
     results[ind, 2] <- len
-    results[ind, 3] <- cor.test(sottoserie, sottoserie2, method = "pearson")$estimate
-    results[ind, 4] <- cor.test(sottoserie, sottoserie2, method = "pearson")$p.value
-    results[ind, 5] <- cor.test(sottoserie, sottoserie2, method = "kendall")$estimate
-    results[ind, 6] <- cor.test(sottoserie, sottoserie2, method = "kendall")$p.value
-    results[, 7] <- ifelse(results[, 4] <= 0.1, 1, 2) #MASKING
-  }
+    results[ind, 3] <- pearson_cor
+    results[ind, 4] <- pearson_pvalue
+    results[ind, 5] <- kendall_cor
+    results[ind, 6] <- kendall_pvalue
+    results[ind, 7] <- ifelse(pearson_pvalue <= 0.1, 1, 2)  # MASKING
+    results[ind, 8] <- ifelse(kendall_pvalue <= 0.1, 1, 2)  # MASKING
+}
 
 results <- as.data.frame(results)
 
@@ -104,7 +138,7 @@ plot2 <- plot2 + ggtitle("CORRELATION TESTS \n Pearson correlation p-values for 
   theme(plot.title = element_text(hjust = 0.5))
 
 ### KENDALL TEST ###
-plot3 <- ggplot(results, aes(x = V1, y = V2, color = V5, shape = factor(V7))) + 
+plot3 <- ggplot(results, aes(x = V1, y = V2, color = V5, shape = factor(V8))) + 
   geom_point(size = 0.9*scale, stroke = 0.3*scale) +
   scale_shape_manual(
     values = c("1" = 19, "2" = 21),

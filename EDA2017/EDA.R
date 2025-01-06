@@ -5,17 +5,25 @@ library(Kendall)
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 # Data upload from Serie.txt
-serie <- scan("SerieR.txt")
+serie <- scan("SerieT.txt")
 n <- length(serie)
 
 # Creation of lists for x_values and y_values
 x_values <- c()
 y_values <- c()
-m = 3 # 1 = NO SUBSAMPLE; > 1 Scale MUST BE AN INTEGER > 1
+m = 1 # 1 = NO SUBSAMPLE; > 1 Scale MUST BE AN INTEGER > 1
+s = 6
+
+# SAFEGUARD FOR VERY LONG SERIES
+if (n > 250){
+  m = ceiling(n/200)
+  s = max(s, m)
+}
+
 scale <- 200 / n * m
 
 # Generation of x_values and y_values
-for (len in seq(6, n, by = m)) {
+for (len in seq(s, n, by = m)) {
   
   for (y in seq(len/2, n-len/2, by = m)) {
     centro <- y
@@ -29,7 +37,9 @@ LEN_MAX <- length(x_values)
 results <- matrix(NA, ncol = 7, nrow = LEN_MAX)
 
 # Global average of the serie.
-media_totale <- mean(serie)
+validi_indices <- complete.cases(serie)
+serie_cleaned <- serie[validi_indices]
+media_totale <- mean(serie_cleaned)
 
 # Loop to populate the matrix
 for (ind in 1:LEN_MAX) {
@@ -41,7 +51,11 @@ for (ind in 1:LEN_MAX) {
     # Sub-series extraction
     sottoserie <- serie[start:end]
     
-    if (length(sottoserie) < 6) next  # Cut off if the serie has less than 6 values
+    if (length(sottoserie) < s) next
+    
+    sottoserie <- sottoserie[is.finite(sottoserie) & complete.cases(sottoserie)]
+    
+    if (length(unique(sottoserie)) < 4) next
     
     # Values
     mean_subserie <- mean(sottoserie)
@@ -75,11 +89,16 @@ plot1 <- ggplot(results, aes(x = V1, y = V2, color = V3)) +
        y = "TIMEWINDOW (Time Units)",
        x = "CENTRAL TIME OF THE TIME WINDOW (Time Mark)",
        color = "Average") +
-  theme_minimal()
+  theme_minimal() +
+  xlim(0, n) +
+  ylim(0, n)
   plot1 <- plot1 + ggtitle("MOVING AVERAGE ANALYSIS \n Averages of all possible sub-series") +
   theme(plot.title = element_text(hjust = 0.5))
   
-CV = ceiling(max(abs(results$V5)))
+max_abs_V5 <- abs(results$V5)
+max_abs_V5 <- max(max_abs_V5, na.rm = TRUE)
+CV <- 10^round(log10(max_abs_V5))
+CV <- ceiling(max_abs_V5/CV)*CV
 colors_neg <- colorRampPalette(c("blue4","blue","cyan"))(33)
 colors_pos <- colorRampPalette(c("yellow","red","red4"))(33)
 combined_colors <- c(colors_neg,"white",colors_pos)
@@ -98,8 +117,10 @@ plot2 <- ggplot(results, aes(x = V1, y = V2, color = V5)) +
   labs(title = "TRENDS",
        y = "TIMEWINDOW (Time Units)",
        x = "CENTRAL TIME OF THE TIME WINDOW (Time Mark)",
-       color = "Average") +
-  theme_minimal()
+       color = "Trends") +
+  theme_minimal() +
+  xlim(0, n) +
+  ylim(0, n)
   plot2 <- plot2 + ggtitle("MOVING TREND ANALYSIS \n Trends of all possible sub-series") +
   theme(plot.title = element_text(hjust = 0.5))
   
@@ -121,12 +142,14 @@ plot3 <- ggplot(subset(results, V4 <= 0.2), aes(x = V1, y = V2, color = V4)) +
   labs(title = "P-VALUES ON AVERAGES",
        y = "TIMEWINDOW (Time Units)",
        x = "CENTRAL TIME OF THE TIME WINDOW (Time Mark)",
-       color = "Average") +
-  theme_minimal()
+       color = "P-Value") +
+  theme_minimal() +
+  xlim(0, n) +
+  ylim(0, n)
 plot3 <- plot3 + ggtitle("MOVING AVERAGE ANALYSIS \n P-values of T-tests on averages") +
   theme(plot.title = element_text(hjust = 0.5))
 
-### P-VALUES TREND ###  
+### P-VALUES TREND ###
 plot4 <- ggplot(subset(results, V6 <= 0.2), aes(x = V1, y = V2, color = V6)) +
   geom_point(size = 0.9*scale, stroke = 0.3*scale) +
   scale_shape_manual(
@@ -140,8 +163,10 @@ plot4 <- ggplot(subset(results, V6 <= 0.2), aes(x = V1, y = V2, color = V6)) +
   labs(title = "P-VALUES ON TRENDS",
        y = "TIMEWINDOW (Time Units)",
        x = "CENTRAL TIME OF THE TIME WINDOW (Time Mark)",
-       color = "Average") +
-  theme_minimal()
+       color = "P-Values") +
+  theme_minimal() +
+  xlim(0, n) +
+  ylim(0, n)
 plot4 <- plot4 + ggtitle("MOVING TREND ANALYSIS \n P-values of kendall's trend tests") +
   theme(plot.title = element_text(hjust = 0.5))
   
