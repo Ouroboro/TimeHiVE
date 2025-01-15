@@ -49,7 +49,7 @@ for (ind in 1:LEN_MAX) {
     sottoserie <- serie[start:end]
     sottoserie2 <- serie2[start:end]
     
-    if (length(sottoserie) < 112) next
+    if (length(sottoserie) < s) next
     
     # Rimuovo gli NA in entrambe le sottoserie, rimuovendo i corrispondenti nelle due serie
     validi_indices <- complete.cases(sottoserie, sottoserie2)
