@@ -42,7 +42,7 @@ results <- matrix(NA, ncol = 8, nrow = LEN_MAX)
 for (ind in 1:LEN_MAX) {
     centro <- x_values[ind]
     len <- y_values[ind]
-    start <- max(1, round(centro - (len - 1) / 2))
+    start <- max(1, ceiling(centro - (len - 1) / 2))
     end <- min(n, ceiling(centro + (len - 1) / 2))
     
     # Sub-series extraction
