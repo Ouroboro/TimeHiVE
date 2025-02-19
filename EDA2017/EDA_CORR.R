@@ -1,12 +1,16 @@
 library(ggplot2)
 library(gridExtra)
-library(Kendall)
 
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
+start.time <- Sys.time()
+
+# Load external functions
+source("kendall_tau.R")
+
 # Data upload from SerieX.txt
-serie <- scan("SerieP1.txt")
-serie2 <- scan("SerieP2.txt")
+serie <- scan("Serie1.txt")
+serie2 <- scan("Serie1b.txt")
 n <- length(serie)
 n2 <- length(serie2)
 
@@ -60,21 +64,19 @@ for (ind in 1:LEN_MAX) {
 
     # Populate and convert the matrix in a dataframe
     # Calcolare la correlazione Pearson e Kendall con tryCatch
-    pearson_cor <- tryCatch({
-      cor.test(sottoserie, sottoserie2, method = "pearson", use = "complete.obs")$estimate
+    pearson <- tryCatch({
+      cor.test(sottoserie, sottoserie2, method = "pearson", use = "complete.obs")
+    }, error = function(e) NA)
+
+    kendall <- tryCatch({
+      #cor.test(sottoserie, sottoserie2, method = "kendall", use = "complete.obs")$p.value
+      kendall_tau(sottoserie, sottoserie2, alternative = c("greater"))
     }, error = function(e) NA)
     
-    pearson_pvalue <- tryCatch({
-      cor.test(sottoserie, sottoserie2, method = "pearson", use = "complete.obs")$p.value
-    }, error = function(e) NA)
-    
-    kendall_cor <- tryCatch({
-      cor.test(sottoserie, sottoserie2, method = "kendall", use = "complete.obs")$estimate
-    }, error = function(e) NA)
-    
-    kendall_pvalue <- tryCatch({
-      cor.test(sottoserie, sottoserie2, method = "kendall", use = "complete.obs")$p.value
-    }, error = function(e) NA)
+    pearson_cor <- pearson$estimate
+    pearson_pvalue <- pearson$p.value
+    kendall_cor <- kendall$tau
+    kendall_pvalue <- kendall$p_value
     
     # Popolare la matrice con i risultati
     results[ind, 1] <- centro
@@ -101,7 +103,7 @@ colors_pos_p <- colorRampPalette(c("grey34","grey44","grey54", "grey64", "grey74
 combined_colors_p <- c(rev(colors_neg_p), colors_pos_p)
 
 ### PEARSON TEST ###
-plot1 <- ggplot(results, aes(x = V1, y = V2, color = V3, shape = factor(V7))) + 
+plot <- ggplot(results, aes(x = V1, y = V2, color = V3, shape = factor(V7))) + 
   geom_point(size = 0.9*scale, stroke = 0.3*scale) +
   scale_shape_manual(
     values = c("1" = 19, "2" = 21),
@@ -116,9 +118,22 @@ plot1 <- ggplot(results, aes(x = V1, y = V2, color = V3, shape = factor(V7))) +
        x = "CENTRAL TIME OF THE TIME WINDOW (Time Mark)",
        color = "Pearson") +
   theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14, margin = margin(b = 14)),
+    axis.title.x = element_text(size = 12, margin = margin(t = 12)),
+    axis.title.y = element_text(size = 12, margin = margin(r = 12)),
+    axis.text.x = element_text(size = 12),
+    axis.text.y = element_text(size = 12),
+    legend.title = element_text(size = 12, margin = margin(b = 12)),
+    legend.text = element_text(size = 12),
+    legend.key.size = unit(1, "cm"),
+    #panel.grid.major = element_line(color = "black", size = 0.5),
+    #panel.grid.minor = element_line(color = "gray67", size = 0.3),
+    #panel.grid.minor.major = element_line(color = "gray", size = 0.2)
+  ) +
   xlim(0, n) +
-  ylim(0, n)  
-plot1 <- plot1 + ggtitle("CORRELATION TESTS \n Pearson correlation coefficient of all possible sub-series") +
+  ylim(0, n)
+plot1 <- plot + ggtitle("CORRELATION TESTS \n Pearson correlation coefficient of all possible sub-series") +
   theme(plot.title = element_text(hjust = 0.5))
 
 plot2 <- ggplot(subset(results, V4 <= 0.2), aes(x = V1, y = V2, color = V4)) +
@@ -132,13 +147,26 @@ plot2 <- ggplot(subset(results, V4 <= 0.2), aes(x = V1, y = V2, color = V4)) +
        x = "CENTRAL TIME OF THE TIME WINDOW (Time Mark)",
        color = "p-Value") +
   theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14, margin = margin(b = 14)),
+    axis.title.x = element_text(size = 12, margin = margin(t = 12)),
+    axis.title.y = element_text(size = 12, margin = margin(r = 12)),
+    axis.text.x = element_text(size = 12),
+    axis.text.y = element_text(size = 12),
+    legend.title = element_text(size = 12, margin = margin(b = 12)),
+    legend.text = element_text(size = 12),
+    legend.key.size = unit(1, "cm"),
+    #panel.grid.major = element_line(color = "black", size = 0.5),
+    #panel.grid.minor = element_line(color = "gray67", size = 0.3),
+    #panel.grid.minor.major = element_line(color = "gray", size = 0.2)
+  ) +
   xlim(0, n) +
-  ylim(0, n)  
+  ylim(0, n)
 plot2 <- plot2 + ggtitle("CORRELATION TESTS \n Pearson correlation p-values for all possible sub-series") +
   theme(plot.title = element_text(hjust = 0.5))
 
 ### KENDALL TEST ###
-plot3 <- ggplot(results, aes(x = V1, y = V2, color = V5, shape = factor(V8))) + 
+plot3 <- ggplot(results, aes(x = V1, y = V2, color = V5, shape = factor(V8))) +
   geom_point(size = 0.9*scale, stroke = 0.3*scale) +
   scale_shape_manual(
     values = c("1" = 19, "2" = 21),
@@ -153,11 +181,24 @@ plot3 <- ggplot(results, aes(x = V1, y = V2, color = V5, shape = factor(V8))) +
        x = "CENTRAL TIME OF THE TIME WINDOW (Time Mark)",
        color = "Kendall") +
   theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14, margin = margin(b = 14)),
+    axis.title.x = element_text(size = 12, margin = margin(t = 12)),
+    axis.title.y = element_text(size = 12, margin = margin(r = 12)),
+    axis.text.x = element_text(size = 12),
+    axis.text.y = element_text(size = 12),
+    legend.title = element_text(size = 12, margin = margin(b = 12)),
+    legend.text = element_text(size = 12),
+    legend.key.size = unit(1, "cm"),
+    #panel.grid.major = element_line(color = "black", size = 0.5),
+    #panel.grid.minor = element_line(color = "gray67", size = 0.3),
+    #panel.grid.minor.major = element_line(color = "gray", size = 0.2)
+  ) +
   xlim(0, n) +
   ylim(0, n)
 plot3 <- plot3 + ggtitle("CORRELATION TESTS \n Kendall correlation coefficient of all possible sub-series") +
   theme(plot.title = element_text(hjust = 0.5))
-  
+
 plot4 <- ggplot(subset(results, V6 <= 0.2), aes(x = V1, y = V2, color = V6)) +
   geom_point(size = 0.9*scale, stroke = 0.3*scale, shape = 19) +
   scale_color_gradientn(
@@ -169,14 +210,31 @@ plot4 <- ggplot(subset(results, V6 <= 0.2), aes(x = V1, y = V2, color = V6)) +
        x = "CENTRAL TIME OF THE TIME WINDOW (Time Mark)",
        color = "p-Value") +
   theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14, margin = margin(b = 14)),
+    axis.title.x = element_text(size = 12, margin = margin(t = 12)),
+    axis.title.y = element_text(size = 12, margin = margin(r = 12)),
+    axis.text.x = element_text(size = 12),
+    axis.text.y = element_text(size = 12),
+    legend.title = element_text(size = 12, margin = margin(b = 12)),
+    legend.text = element_text(size = 12),
+    legend.key.size = unit(1, "cm"),
+    #panel.grid.major = element_line(color = "black", size = 0.5),
+    #panel.grid.minor = element_line(color = "gray67", size = 0.3),
+    #panel.grid.minor.major = element_line(color = "gray", size = 0.2)
+  ) +
   xlim(0, n) +
-  ylim(0, n)  
+  ylim(0, n)
 plot4 <- plot4 + ggtitle("CORRELATION TESTS \n Kendall correlation p-values for all possible sub-series") +
   theme(plot.title = element_text(hjust = 0.5))
-  
+
 plot <- grid.arrange(plot1, plot2, plot3, plot4, ncol = 2, nrow = 2)
   
 ggsave("temp_filename.png", plot, width = 50, height = 42, units = "cm", dpi = 600, bg = "white")
 }
 
 create_plots(results)
+
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+print(time.taken)
