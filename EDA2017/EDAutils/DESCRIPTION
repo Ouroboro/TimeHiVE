@@ -1,0 +1,23 @@
+Package: EDAutils
+Title: Utilities for Exploratory Data Analysis
+Version: 0.1.0
+Authors@R: 
+    person("Boselli", "Vladimiro Andrea", email = "boselli.v@irea.cnr.it", role = c("aut", "cre"))
+    person("Tagliolato Acquaviva d'Argona", "Paolo", email = "paolo.tagliolatoacquavivadar@cnr.it", role = c("cre"))
+    person("Oggioni", "Alessandro", email = "oggioni.a@irea.cnr.it", role = c("cre"))
+Description: A collection of utilities for exploratory data analysis including
+    efficient implementations of statistical tests and visualization tools.
+License: GPL-3
+Depends:
+    R (>= 3.5.0)
+Imports:
+    ggplot2,
+    gridExtra,
+    parallel,
+    stats,
+    lubridate,
+Suggests:
+    testthat (>= 3.0.0)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.2
