@@ -180,12 +180,13 @@ create_psychrometric_plot <- function(grid_df, temperature_data, rel_humidity_da
   mean_enthalpy <- params["mean_enthalpy"]
   mean_spec_humidity <- params["mean_spec_humidity"]
   
+  cmax <- ceiling(max(grid_df[3]) / 10) * 10
   # Create base plot
   psychro_plot <- ggplot(grid_df, aes(x = temperature, y = specific_humidity)) +
     geom_point(aes(color = occurrences, size = 1, stroke = 1), shape = 19) +
     scale_color_gradientn(
       colors = c("blue4", "blue", "cyan", "green", "yellow", "red", "red3"),
-      limits = c(0, 300),
+      limits = c(0, cmax),
       na.value = NA,
       name = "Occurrences"
     ) +

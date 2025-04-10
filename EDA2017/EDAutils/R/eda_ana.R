@@ -23,7 +23,6 @@ eda_single <- function(series, m = NULL, s = NULL) {
   if (is.null(m)) m <- if (n > 250) ceiling(n / 200) else 1
   s <- 6 * m
   
-  m <- 1
   # Sequence calculation
   seq_x <- seq(s, n, by = m)
   seq_y <- seq(s / 2, n - s / 2, by = m)
@@ -72,9 +71,15 @@ eda_single <- function(series, m = NULL, s = NULL) {
   results_list <- mclapply(1:LEN_MAX, process_subseries, mc.cores = detectCores() - 1)
   results <- do.call(rbind, results_list)
   
-  # Convert to data.frame
-  results <- as.data.frame(results)
-  colnames(results) <- c("V1", "V2", "V3", "V4", "V5", "V6", "V7")
+  # Gestione del caso vuoto con warning
+  if (is.null(results) || nrow(results) == 0) {
+    warning("Nessuna sottoserie valida: tutte scartate per mancanza di variabilit\u00E0 (valori unici < 4).")
+    results <- data.frame(matrix(ncol = 7, nrow = 0))
+    colnames(results) <- c("V1", "V2", "V3", "V4", "V5", "V6", "V7")
+  } else {
+    results <- as.data.frame(results)
+    colnames(results) <- c("V1", "V2", "V3", "V4", "V5", "V6", "V7")
+  }
   
   return(results)
 }

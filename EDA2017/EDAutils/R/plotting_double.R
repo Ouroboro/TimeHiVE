@@ -19,8 +19,10 @@ eda_plotd <- function(results, scale = NULL, output_file = NULL) {
   
   # Calculate dynamic parameters
   n <- max(results$V1, na.rm = TRUE)
+  m_calculated <- if (n > 250) ceiling(n / 200) else 1
+  
   if (is.null(scale)) {
-    scale <- 200 / n
+    scale <- 200 / n * m_calculated
   }
   
   # Define common theme
