@@ -1,0 +1,16 @@
+citHeader("To cite the 'MSAutils' package in publications use:")
+
+year <- format(Sys.Date(), "%Y")
+
+citEntry(entry = "Misc",
+         title = "Moving statistical analisys for time-series",
+         author = personList(as.person("Vladimiro Andrea Boselli"),
+                             as.person("Paolo Tagliolato"),
+                             as.person("Alessandro Oggioni")),
+         year = year,
+         note = paste("R package version", "v0.1.0"),
+         textVersion =
+           paste("Vladimiro Andrea Boselli, Paolo Tagliolato, Alessandro Oggioni.",
+                 "(2023). Moving statistical analisys for time-series (v0.1.0).",
+                 "Zenodo. https://doi.org/10.5281/zenodo.xxxxxxxxx")
+)

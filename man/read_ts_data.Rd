@@ -9,7 +9,7 @@ read_ts_data(file_path, ...)
 \arguments{
 \item{file_path}{Path to the input file}
 
-\item{...}{Additional arguments passed to `scan()`}
+\item{...}{Additional arguments passed to \code{scan()}}
 }
 \value{
 Numeric vector with the data

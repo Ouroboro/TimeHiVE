@@ -7,15 +7,28 @@
 eda_single(series, m = NULL, s = NULL)
 }
 \arguments{
-\item{series}{Numerical vector containing NA for missing values.}
+\item{`series`}{A \verb{numerical vector} containing NA for missing values.}
 
-\item{m}{Optional, scaling factor (autocalculated).}
+\item{`m`}{A \code{numeric} positive integer, subsampling parameters. Optional
+(default: autocalculated).}
 
-\item{s}{Optional, cutoff series length (autocalculated: default 6*m).}
+\item{`s`}{A \code{numeric} ...}
 }
 \value{
-A result DataFrame to pass to plotting_single().
+A result \code{data.frame} to pass to plotting_single().
 }
 \description{
-Perform Exploratory Data Analysis on Time Series
+A short description...
+}
+\examples{
+ \dontrun{
+output <- eda_single(
+  series = c(1.2, 3.4, 2.5, 4.1, 5.6),
+  m = 1,
+  s = 6
+)
+}
+}
+\author{
+Vladimiro Boselli, phD (2025) \email{boselli.v@irea.cnr.it}
 }

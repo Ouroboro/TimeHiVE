@@ -1,0 +1,165 @@
+# --------------------------------------------
+# CITATION file created with {cffr} R package
+# See also: https://docs.ropensci.org/cffr/
+# --------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "MSAutils" in publications use:'
+type: software
+license: GPL-3.0-only
+title: 'MSAutils: Moving statistical analisys for time-series'
+version: 0.1.0
+abstract: A collection of utilities for moving averages, trends, and correlations
+  analysis of time-series, including efficient implementations of statistical tests
+  and visualization tools.
+authors:
+- family-names: Vladimiro Andrea
+  given-names: Boselli
+  email: boselli.v@irea.cnr.it
+  orcid: https://orcid.org/0000-0003-2985-6358
+- family-names: Paolo
+  given-names: Tagliolato Acquaviva d'Argona
+  email: paolo.tagliolatoacquavivadar@cnr.it
+  orcid: https://orcid.org/0000-0002-0261-313X
+- family-names: Alessandro
+  given-names: Oggioni
+  email: oggioni.a@irea.cnr.it
+  orcid: https://orcid.org/0000-0002-7997-219X
+preferred-citation:
+  type: generic
+  title: Moving statistical analisys for time-series
+  authors:
+  - family-names: Boselli
+    given-names: Vladimiro Andrea
+  - family-names: Tagliolato
+    given-names: Paolo
+  - family-names: Oggioni
+    given-names: Alessandro
+  year: '2025'
+  notes: R package version v0.1.0
+contact:
+- family-names: Vladimiro Andrea
+  given-names: Boselli
+  email: boselli.v@irea.cnr.it
+  orcid: https://orcid.org/0000-0003-2985-6358
+- family-names: Paolo
+  given-names: Tagliolato Acquaviva d'Argona
+  email: paolo.tagliolatoacquavivadar@cnr.it
+  orcid: https://orcid.org/0000-0002-0261-313X
+- family-names: Alessandro
+  given-names: Oggioni
+  email: oggioni.a@irea.cnr.it
+  orcid: https://orcid.org/0000-0002-7997-219X
+references:
+- type: software
+  title: 'R: A Language and Environment for Statistical Computing'
+  notes: Depends
+  url: https://www.R-project.org/
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2025'
+  version: '>= 3.5.0'
+- type: software
+  title: ggplot2
+  abstract: 'ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics'
+  notes: Imports
+  url: https://ggplot2.tidyverse.org
+  repository: https://CRAN.R-project.org/package=ggplot2
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+    orcid: https://orcid.org/0000-0003-4757-117X
+  - family-names: Chang
+    given-names: Winston
+    orcid: https://orcid.org/0000-0002-1576-2126
+  - family-names: Henry
+    given-names: Lionel
+  - family-names: Pedersen
+    given-names: Thomas Lin
+    email: thomas.pedersen@posit.co
+    orcid: https://orcid.org/0000-0002-5147-4711
+  - family-names: Takahashi
+    given-names: Kohske
+  - family-names: Wilke
+    given-names: Claus
+    orcid: https://orcid.org/0000-0002-7470-9261
+  - family-names: Woo
+    given-names: Kara
+    orcid: https://orcid.org/0000-0002-5125-4188
+  - family-names: Yutani
+    given-names: Hiroaki
+    orcid: https://orcid.org/0000-0002-3385-7233
+  - family-names: Dunnington
+    given-names: Dewey
+    orcid: https://orcid.org/0000-0002-9415-4582
+  - family-names: Brand
+    given-names: Teun
+    name-particle: van den
+    orcid: https://orcid.org/0000-0002-9335-7468
+  year: '2025'
+  doi: 10.32614/CRAN.package.ggplot2
+- type: software
+  title: gridExtra
+  abstract: 'gridExtra: Miscellaneous Functions for "Grid" Graphics'
+  notes: Imports
+  repository: https://CRAN.R-project.org/package=gridExtra
+  authors:
+  - family-names: Auguie
+    given-names: Baptiste
+    email: baptiste.auguie@gmail.com
+  year: '2025'
+  doi: 10.32614/CRAN.package.gridExtra
+- type: software
+  title: parallel
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2025'
+- type: software
+  title: stats
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2025'
+- type: software
+  title: lubridate
+  abstract: 'lubridate: Make Dealing with Dates a Little Easier'
+  notes: Imports
+  url: https://lubridate.tidyverse.org
+  repository: https://CRAN.R-project.org/package=lubridate
+  authors:
+  - family-names: Spinu
+    given-names: Vitalie
+    email: spinuvit@gmail.com
+  - family-names: Grolemund
+    given-names: Garrett
+  - family-names: Wickham
+    given-names: Hadley
+  year: '2025'
+  doi: 10.32614/CRAN.package.lubridate
+- type: software
+  title: testthat
+  abstract: 'testthat: Unit Testing for R'
+  notes: Suggests
+  url: https://testthat.r-lib.org
+  repository: https://CRAN.R-project.org/package=testthat
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2025'
+  doi: 10.32614/CRAN.package.testthat
+  version: '>= 3.0.0'
+

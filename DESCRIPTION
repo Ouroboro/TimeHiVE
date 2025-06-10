@@ -1,13 +1,22 @@
-Package: EDAutils
-Title: Utilities for Exploratory Data Analysis
+Package: MSAutils
+Title: Moving statistical analisys for time-series
 Version: 0.1.0
-Authors@R: 
-    person("Boselli", "Vladimiro Andrea", email = "boselli.v@irea.cnr.it", role = c("aut", "cre"))
-    person("Tagliolato Acquaviva d'Argona", "Paolo", email = "paolo.tagliolatoacquavivadar@cnr.it", role = c("cre"))
-    person("Oggioni", "Alessandro", email = "oggioni.a@irea.cnr.it", role = c("cre"))
-Description: A collection of utilities for exploratory data analysis including
+Authors@R: c(
+    person("Boselli", "Vladimiro Andrea", ,email = "boselli.v@irea.cnr.it", role = c("aut", "cre", "cph"),
+      comment = c(ORCID = "0000-0003-2985-6358")),
+    person("Tagliolato Acquaviva d'Argona", "Paolo", ,email = "paolo.tagliolatoacquavivadar@cnr.it", role = c("cre"),
+      comment = c(ORCID = "0000-0002-0261-313X")),
+    person("Oggioni", "Alessandro", ,email = "oggioni.a@irea.cnr.it", role = c("cre"),
+      comment = c(ORCID = "0000-0002-7997-219X"))
+    )
+Description: A collection of utilities for moving averages, trends, and correlations analysis of time-series, including
     efficient implementations of statistical tests and visualization tools.
-License: GPL-3
+License: `use_gpl3_license()`
+URL: https://github.com/Ouroboro/EnvDataShow
+BugReports: https://github.com/Ouroboro/EnvDataShow/issues
+Encoding: UTF-8
+Language: en-GB
+Roxygen: list(markdown = TRUE)
 Depends:
     R (>= 3.5.0)
 Imports:
@@ -15,9 +24,8 @@ Imports:
     gridExtra,
     parallel,
     stats,
-    lubridate,
+    lubridate
 Suggests:
     testthat (>= 3.0.0)
-Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.2
