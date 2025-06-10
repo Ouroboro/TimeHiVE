@@ -1,15 +1,15 @@
-Package: MSAutils
-Title: Moving statistical analisys for time-series
+Package: TimeHiVe
+Title: Time-series Hierarchical Visual Explorer
 Version: 0.1.0
 Authors@R: c(
-    person("Boselli", "Vladimiro Andrea", ,email = "boselli.v@irea.cnr.it", role = c("aut", "cre", "cph"),
+    person("Vladimiro Andrea", "Boselli", ,email = "boselli.v@irea.cnr.it", role = c("aut", "cre", "cph"),
       comment = c(ORCID = "0000-0003-2985-6358")),
-    person("Tagliolato Acquaviva d'Argona", "Paolo", ,email = "paolo.tagliolatoacquavivadar@cnr.it", role = c("cre"),
+    person("Paolo", "Tagliolato Acquaviva d'Aragona", ,email = "paolo.tagliolatoacquavivadar@cnr.it", role = c("aut"),
       comment = c(ORCID = "0000-0002-0261-313X")),
-    person("Oggioni", "Alessandro", ,email = "oggioni.a@irea.cnr.it", role = c("cre"),
+    person("Alessandro", "Oggioni", ,email = "oggioni.a@irea.cnr.it", role = c("aut"),
       comment = c(ORCID = "0000-0002-7997-219X"))
     )
-Description: A collection of utilities for moving averages, trends, and correlations analysis of time-series, including
+Description: Hierarchical moving-window statistical analysis for time series. A collection of utilities for moving averages, trends, and correlations analysis of time-series, including
     efficient implementations of statistical tests and visualization tools.
 License: `use_gpl3_license()`
 URL: https://github.com/Ouroboro/EnvDataShow

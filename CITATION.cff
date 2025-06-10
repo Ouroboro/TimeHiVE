@@ -4,25 +4,24 @@
 # --------------------------------------------
  
 cff-version: 1.2.0
-message: 'To cite package "MSAutils" in publications use:'
+message: 'To cite package "TimeHiVe" in publications use:'
 type: software
-license: GPL-3.0-only
-title: 'MSAutils: Moving statistical analisys for time-series'
+title: 'TimeHiVe: Time-series Hierarchical Visual Explorer'
 version: 0.1.0
-abstract: A collection of utilities for moving averages, trends, and correlations
-  analysis of time-series, including efficient implementations of statistical tests
-  and visualization tools.
+abstract: Hierarchical moving-window statistical analysis for time series. A collection
+  of utilities for moving averages, trends, and correlations analysis of time-series,
+  including efficient implementations of statistical tests and visualization tools.
 authors:
-- family-names: Vladimiro Andrea
-  given-names: Boselli
+- family-names: Boselli
+  given-names: Vladimiro Andrea
   email: boselli.v@irea.cnr.it
   orcid: https://orcid.org/0000-0003-2985-6358
-- family-names: Paolo
-  given-names: Tagliolato Acquaviva d'Argona
+- family-names: Tagliolato Acquaviva d'Aragona
+  given-names: Paolo
   email: paolo.tagliolatoacquavivadar@cnr.it
   orcid: https://orcid.org/0000-0002-0261-313X
-- family-names: Alessandro
-  given-names: Oggioni
+- family-names: Oggioni
+  given-names: Alessandro
   email: oggioni.a@irea.cnr.it
   orcid: https://orcid.org/0000-0002-7997-219X
 preferred-citation:
@@ -31,25 +30,23 @@ preferred-citation:
   authors:
   - family-names: Boselli
     given-names: Vladimiro Andrea
+    email: boselli.v@irea.cnr.it
+    orcid: https://orcid.org/0000-0003-2985-6358
   - family-names: Tagliolato
     given-names: Paolo
   - family-names: Oggioni
     given-names: Alessandro
+    email: oggioni.a@irea.cnr.it
+    orcid: https://orcid.org/0000-0002-7997-219X
   year: '2025'
   notes: R package version v0.1.0
+repository-code: https://github.com/Ouroboro/EnvDataShow
+url: https://github.com/Ouroboro/EnvDataShow
 contact:
-- family-names: Vladimiro Andrea
-  given-names: Boselli
+- family-names: Boselli
+  given-names: Vladimiro Andrea
   email: boselli.v@irea.cnr.it
   orcid: https://orcid.org/0000-0003-2985-6358
-- family-names: Paolo
-  given-names: Tagliolato Acquaviva d'Argona
-  email: paolo.tagliolatoacquavivadar@cnr.it
-  orcid: https://orcid.org/0000-0002-0261-313X
-- family-names: Alessandro
-  given-names: Oggioni
-  email: oggioni.a@irea.cnr.it
-  orcid: https://orcid.org/0000-0002-7997-219X
 references:
 - type: software
   title: 'R: A Language and Environment for Statistical Computing'

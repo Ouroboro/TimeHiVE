@@ -23,12 +23,12 @@ A short description...
 \examples{
  \dontrun{
 output <- eda_single(
-  series = c(1.2, 3.4, 2.5, 4.1, 5.6),
-  m = 1,
+  series = rnorm(200),
+  m = 2,
   s = 6
 )
 }
 }
 \author{
-Vladimiro Boselli, phD (2025) \email{boselli.v@irea.cnr.it}
+Vladimiro Boselli, (2025) \email{boselli.v@irea.cnr.it}
 }
