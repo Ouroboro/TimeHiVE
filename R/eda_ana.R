@@ -1,13 +1,25 @@
 #' Perform Exploratory Data Analysis on Time Series
-#'
-#' @param series Numerical vector containing NA for missing values.
-#' @param m Optional, scaling factor (autocalculated).
-#' @param s Optional, cutoff series length (autocalculated: default 6*m).
-#' @return A result DataFrame to pass to plotting_single().
+#' @description
+#' A short description...
+#' 
+#' @param `series` A `numerical vector` containing NA for missing values.
+#' @param `m` A `numeric` positive integer, subsampling parameters. Optional
+#' (default: autocalculated).
+#' @param `s` A `numeric` ...
+#' @return A result `data.frame` to pass to plotting_single().
 #' @export
 #' @importFrom parallel mclapply detectCores
 #' @importFrom stats t.test lm pnorm
-
+#' @author Vladimiro Boselli, phD (2025) \email{boselli.v@@irea.cnr.it}
+#' @examples
+#'  \dontrun{
+#' output <- eda_single(
+#'   series = c(1.2, 3.4, 2.5, 4.1, 5.6),
+#'   m = 1,
+#'   s = 6
+#' )
+#' }
+### function eda_single
 eda_single <- function(series, m = NULL, s = NULL) {
   
   # Check input

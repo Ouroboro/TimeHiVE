@@ -1,10 +1,6 @@
 # PsychroPlot.R
 # A script to create psychrometric plots from temperature and humidity data
 
-# Load necessary packages
-library(ggplot2)
-library(lubridate)  # For date/time manipulation
-
 # Calculate specific humidity (g/kg) from relative humidity and temperature
 # H: Relative humidity (%)
 # T: Temperature (°C)
