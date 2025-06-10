@@ -51,3 +51,5 @@ rsconnect/
 *.Rproj
 *.RData
 ./EDA2017/EDAUtils/Homer.R
+
+example_bloks/
