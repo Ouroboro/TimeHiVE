@@ -1,20 +1,30 @@
-#' Mann-Kendall Trend Test
-#' 
+#' Mann-Kendall Trend Test with Knight's Algorithm
+#' @description
 #' Efficient implementation of the Mann-Kendall test for trend detection using
 #' merge sort algorithm (O(n log^2 n) complexity).
-#' 
-#' @param data_series Numeric vector of data to analyze
+#'
+#' @param `data_series` a `numerical vector` containing NA for missing values.
 #' @return A list with components:
 #' \item{S}{Mann-Kendall S statistic}
 #' \item{Var.S}{Variance of S}
 #' \item{Z}{Z-score}
 #' \item{p.value}{Two-sided p-value}
 #' @export
+#' @import ggplot2
+#' @importFrom gridExtra grid.arrange
+#' @importFrom grDevices colorRampPalette
+#' @author Vladimiro Andrea Boselli, (2025) \email{boselli.v@@irea.cnr.it}
 #' @examples
+#'  \dontrun{
 #' data <- c(1.2, 3.4, 2.5, 4.1, 5.6)
-#' result <- mann_kendall(data)
+#' result <- TH_MK_Trend(data)
+#' }
+### function TH_MK_Trend
 
-mann_kendall <- function(data_series) {
+TH_MK_Trend <- function(data_series) {
+  
+  ### MERGE SORT WITH SWAPS
+  
   merge_sort_with_swaps <- function(vec) {
     
     # Initialize the trade count
@@ -68,6 +78,8 @@ mann_kendall <- function(data_series) {
     return(swap_count)
   }
   
+  ### COUNT OCCURENCIES
+  
   count_occurrences <- function(vec) {
     # Initialize a list to store the counts
     counts <- list()
@@ -87,6 +99,8 @@ mann_kendall <- function(data_series) {
     # Return the vector with occurrences
     return(result)
   }
+  
+  ### START HERE TH_MK_Trend() FUNCTION
   
   n <- length(data_series)
   
