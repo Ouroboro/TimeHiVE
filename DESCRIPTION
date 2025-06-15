@@ -4,7 +4,7 @@ Version: 0.1.0
 Authors@R: c(
     person("Vladimiro Andrea", "Boselli", ,email = "boselli.v@irea.cnr.it", role = c("aut", "cre", "cph"),
       comment = c(ORCID = "0000-0003-2985-6358")),
-    person("Paolo", "Tagliolato Acquaviva d'Aragona", ,email = "paolo.tagliolatoacquavivadar@cnr.it", role = c("aut"),
+    person("Paolo", "Tagliolato Acquaviva d'Aragona", ,email = "tagliolato.p@cnr.it", role = c("aut"),
       comment = c(ORCID = "0000-0002-0261-313X")),
     person("Alessandro", "Oggioni", ,email = "oggioni.a@irea.cnr.it", role = c("aut"),
       comment = c(ORCID = "0000-0002-7997-219X"))
@@ -12,7 +12,7 @@ Authors@R: c(
 Description: Hierarchical moving-window statistical analysis for time series. A collection of utilities for moving averages, trends, and correlations analysis of time-series, including
     efficient implementations of statistical tests and visualization tools.
 License: `use_gpl3_license()`
-URL: https://github.com/Ouroboro/EnvDataShow
+URL: https://github.com/Ouroboro/EnvDataShow, https://ouroboro.github.io/TimeHiVE/
 BugReports: https://github.com/Ouroboro/EnvDataShow/issues
 Encoding: UTF-8
 Language: en-GB

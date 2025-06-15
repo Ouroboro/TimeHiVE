@@ -1,0 +1,154 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "identifier": "TimeHiVe",
+  "description": "Hierarchical moving-window statistical analysis for time series. A collection of utilities for moving averages, trends, and correlations analysis of time-series, including efficient implementations of statistical tests and visualization tools.",
+  "name": "TimeHiVe: Time-series Hierarchical Visual Explorer",
+  "codeRepository": "https://github.com/Ouroboro/EnvDataShow",
+  "issueTracker": "https://github.com/Ouroboro/EnvDataShow/issues",
+  "license": "`use_gpl3_license()`",
+  "version": "0.1.0",
+  "programmingLanguage": {
+    "@type": "ComputerLanguage",
+    "name": "R",
+    "url": "https://r-project.org"
+  },
+  "runtimePlatform": "R version 4.1.2 (2021-11-01)",
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Vladimiro Andrea",
+      "familyName": "Boselli",
+      "email": "boselli.v@irea.cnr.it",
+      "@id": "https://orcid.org/0000-0003-2985-6358"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Paolo",
+      "familyName": "Tagliolato Acquaviva d'Aragona",
+      "email": "tagliolato.p@cnr.it",
+      "@id": "https://orcid.org/0000-0002-0261-313X"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Alessandro",
+      "familyName": "Oggioni",
+      "email": "oggioni.a@irea.cnr.it",
+      "@id": "https://orcid.org/0000-0002-7997-219X"
+    }
+  ],
+  "copyrightHolder": [
+    {
+      "@type": "Person",
+      "givenName": "Vladimiro Andrea",
+      "familyName": "Boselli",
+      "email": "boselli.v@irea.cnr.it",
+      "@id": "https://orcid.org/0000-0003-2985-6358"
+    }
+  ],
+  "maintainer": [
+    {
+      "@type": "Person",
+      "givenName": "Vladimiro Andrea",
+      "familyName": "Boselli",
+      "email": "boselli.v@irea.cnr.it",
+      "@id": "https://orcid.org/0000-0003-2985-6358"
+    }
+  ],
+  "softwareSuggestions": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "testthat",
+      "name": "testthat",
+      "version": ">= 3.0.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=testthat"
+    }
+  ],
+  "softwareRequirements": {
+    "1": {
+      "@type": "SoftwareApplication",
+      "identifier": "R",
+      "name": "R",
+      "version": ">= 3.5.0"
+    },
+    "2": {
+      "@type": "SoftwareApplication",
+      "identifier": "ggplot2",
+      "name": "ggplot2",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=ggplot2"
+    },
+    "3": {
+      "@type": "SoftwareApplication",
+      "identifier": "gridExtra",
+      "name": "gridExtra",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=gridExtra"
+    },
+    "4": {
+      "@type": "SoftwareApplication",
+      "identifier": "parallel",
+      "name": "parallel"
+    },
+    "5": {
+      "@type": "SoftwareApplication",
+      "identifier": "stats",
+      "name": "stats"
+    },
+    "6": {
+      "@type": "SoftwareApplication",
+      "identifier": "lubridate",
+      "name": "lubridate",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=lubridate"
+    },
+    "SystemRequirements": null
+  },
+  "fileSize": "2777.004KB",
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "datePublished": "2025",
+      "author": [
+        {
+          "@type": "Person",
+          "givenName": ["Vladimiro", "Andrea"],
+          "familyName": "Boselli"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Paolo",
+          "familyName": "Tagliolato"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Alessandro",
+          "familyName": "Oggioni"
+        }
+      ],
+      "name": "Time-series Hierarchical Visual Explorer",
+      "description": "R package version v0.1.0"
+    }
+  ]
+}

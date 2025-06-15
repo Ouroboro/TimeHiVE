@@ -1,7 +1,7 @@
 #' Perform hierarchical moving-window statistical analysis for time series.
 #' @description
 #' Perform hierarchical moving-window statistical analysis for coupled time
-#' series. It returns analysis on moving correlations using Pearson's 
+#' series. It returns analysis on moving correlations using Pearson's
 #' correlation coefficient and Mann-Kendall correlation coefficient. The results
 #' are in a `data.frame` to be passed to TH_plotc() function.
 #'
