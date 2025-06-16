@@ -1,0 +1,9 @@
+pandoc: 3.7.0.1
+pkgdown: 2.0.7
+pkgdown_sha: ~
+articles: {}
+last_built: 2025-06-16T12:32Z
+urls:
+  reference: https://ouroboro.github.io/TimeHiVE/reference
+  article: https://ouroboro.github.io/TimeHiVE/articles
+
