@@ -8,7 +8,6 @@ message: 'To cite package "TimeHiVe" in publications use:'
 type: software
 title: 'TimeHiVe: Time-series Hierarchical Visual Explorer'
 version: 0.1.0
-doi: 10.5281/zenodo.15697262
 abstract: Hierarchical moving-window statistical analysis for time series. A collection
   of utilities for moving averages, trends, and correlations analysis of time-series,
   including efficient implementations of statistical tests and visualization tools.
@@ -41,8 +40,8 @@ preferred-citation:
     orcid: https://orcid.org/0000-0002-7997-219X
   year: '2025'
   notes: R package version v0.1.0
-repository-code: https://github.com/Ouroboro/EnvDataShow
-url: https://ouroboro.github.io/TimeHiVE/
+repository-code: https://github.com/Ouroboro/TimeHiVe
+url: https://github.com/Ouroboro/TimeHiVe
 contact:
 - family-names: Boselli
   given-names: Vladimiro Andrea

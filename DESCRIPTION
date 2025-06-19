@@ -12,8 +12,8 @@ Authors@R: c(
 Description: Hierarchical moving-window statistical analysis for time series. A collection of utilities for moving averages, trends, and correlations analysis of time-series, including
     efficient implementations of statistical tests and visualization tools.
 License: GPL-3.0-or-later
-URL: https://github.com/Ouroboro/EnvDataShow, https://ouroboro.github.io/TimeHiVE/
-BugReports: https://github.com/Ouroboro/EnvDataShow/issues
+URL: https://github.com/Ouroboro/TimeHiVe
+BugReports: https://github.com/Ouroboro/TimeHiVe/issues
 Encoding: UTF-8
 Language: en-GB
 Roxygen: list(markdown = TRUE)
