@@ -1,36 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://github.com/Ouroboro/EnvDataShow/404.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/Ouroboro/EnvDataShow/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/Ouroboro/EnvDataShow/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/Ouroboro/EnvDataShow/index.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/Ouroboro/EnvDataShow/reference/TH_MK_Corr.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/Ouroboro/EnvDataShow/reference/TH_MK_Trend.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/Ouroboro/EnvDataShow/reference/TH_coupled.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/Ouroboro/EnvDataShow/reference/TH_plotc.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/Ouroboro/EnvDataShow/reference/TH_plots.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/Ouroboro/EnvDataShow/reference/TH_single.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/Ouroboro/EnvDataShow/reference/index.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://github.com/Ouroboro/TimeHive/404.html</loc></url>
+<url><loc>https://github.com/Ouroboro/TimeHive/LICENSE-text.html</loc></url>
+<url><loc>https://github.com/Ouroboro/TimeHive/authors.html</loc></url>
+<url><loc>https://github.com/Ouroboro/TimeHive/index.html</loc></url>
+<url><loc>https://github.com/Ouroboro/TimeHive/reference/TH_MK_Corr.html</loc></url>
+<url><loc>https://github.com/Ouroboro/TimeHive/reference/TH_MK_Trend.html</loc></url>
+<url><loc>https://github.com/Ouroboro/TimeHive/reference/TH_coupled.html</loc></url>
+<url><loc>https://github.com/Ouroboro/TimeHive/reference/TH_plotc.html</loc></url>
+<url><loc>https://github.com/Ouroboro/TimeHive/reference/TH_plots.html</loc></url>
+<url><loc>https://github.com/Ouroboro/TimeHive/reference/TH_single.html</loc></url>
+<url><loc>https://github.com/Ouroboro/TimeHive/reference/index.html</loc></url>
 </urlset>
+
