@@ -2,7 +2,7 @@
 
 <!-- badges: start -->
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![R-CMD-check](https://github.com/Ouroboro/TimeHiVE/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Ouroboro/TimeHiVE/actions/workflows/R-CMD-check.yaml)
+<!-- [![](https://img.shields.io/badge/doi-10.5281/zenodo.5576813-yellow.svg)](https://doi.org/10.5281/zenodo.5576813) -->
 <!-- badges: end -->
 
 ## Overview
