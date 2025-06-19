@@ -1,4 +1,23 @@
-url: https://ouroboro.github.io/TimeHiVE/
+title: MSAutils
+url: https://github.com/Ouroboro/EnvDataShow
 template:
   bootstrap: 5
+  params:
+    mathjax: true
+  includes:
+    in_header: |
+      <script defer data-domain="github.org/Ouroboro" src="https://plausible.io/js/plausible.js"></script>
 
+reference:
+  - title: All functions
+    contents:
+    - TH_single
+    - TH_coupled
+    - TH_plots
+    - TH_plotc
+    - TH_MK_Trend
+    - TH_MK_Corr
+navbar:
+  structure:
+    left: [reference]
+    right: [github]
