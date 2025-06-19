@@ -1,4 +1,4 @@
-citHeader("To cite the 'TimeHiVe' package in publications use:")
+citHeader("To cite the 'TimeHiVE' package in publications use:")
 
 year <- format(Sys.Date(), "%Y")
 

@@ -1,9 +1,9 @@
 {
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
-  "identifier": "TimeHiVe",
+  "identifier": "TimeHiVE",
   "description": "Hierarchical moving-window statistical analysis for time series. A collection of utilities for moving averages, trends, and correlations analysis of time-series, including efficient implementations of statistical tests and visualization tools.",
-  "name": "TimeHiVe: Time-series Hierarchical Visual Explorer",
+  "name": "TimeHiVE: Time-series Hierarchical Visual Explorer",
   "codeRepository": "https://github.com/Ouroboro/EnvDataShow",
   "issueTracker": "https://github.com/Ouroboro/EnvDataShow/issues",
   "license": "`use_gpl3_license()`",

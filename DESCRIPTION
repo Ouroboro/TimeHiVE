@@ -1,4 +1,4 @@
-Package: TimeHiVe
+Package: TimeHiVE
 Title: Time-series Hierarchical Visual Explorer
 Version: 0.1.0
 Authors@R: c(
@@ -12,8 +12,8 @@ Authors@R: c(
 Description: Hierarchical moving-window statistical analysis for time series. A collection of utilities for moving averages, trends, and correlations analysis of time-series, including
     efficient implementations of statistical tests and visualization tools.
 License: GPL-3.0-or-later
-URL: https://github.com/Ouroboro/TimeHiVe
-BugReports: https://github.com/Ouroboro/TimeHiVe/issues
+URL: https://github.com/Ouroboro/TimeHiVE
+BugReports: https://github.com/Ouroboro/TimeHiVE/issues
 Encoding: UTF-8
 Language: en-GB
 Roxygen: list(markdown = TRUE)
