@@ -12,5 +12,5 @@ citEntry(entry = "Misc",
          textVersion =
            paste("Vladimiro Andrea Boselli, Paolo Tagliolato, Alessandro Oggioni.",
                  "(2025). Time-series Hierarchical Visual Explorer (v0.1.0).",
-                 "Zenodo. https://doi.org/10.5281/zenodo.xxxxxxxxx")
+                 "Zenodo. https://doi.org/10.5281/zenodo.15697262")
 )
