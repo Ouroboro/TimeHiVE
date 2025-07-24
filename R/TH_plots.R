@@ -137,7 +137,7 @@ TH_plots <- function(results, scale = NULL, output_file = NULL, mask = FALSE, mo
     
     if (mask && mode %in% c("all", "avg_with_test")) {
       plot1 <- ggplot(data_plot1, aes(x = V1, y = V2, color = V3)) +
-        geom_point(aes(shape = factor(V7)), size = 0.9 * scale) +
+        geom_point(aes(shape = factor(V7)), size = scale, stroke = 0.2 * scale) +
         scale_color_gradientn(colors = color_palettes$avg) +
         scale_shape_manual(
           values = c(19, 21),
@@ -152,7 +152,7 @@ TH_plots <- function(results, scale = NULL, output_file = NULL, mask = FALSE, mo
         coord_cartesian(xlim = c(0, n), ylim = c(0, n))
     } else {
       plot1 <- ggplot(data_plot1, aes(x = V1, y = V2, color = V3)) +
-        geom_point(size = 0.9 * scale) +
+        geom_point(size = scale, stroke = 0.2 * scale) +
         scale_color_gradientn(colors = color_palettes$avg) +
         labs(
           title = "MOVING AVERAGE ANALYSIS\nAverages of all possible sub-series",
@@ -170,7 +170,7 @@ TH_plots <- function(results, scale = NULL, output_file = NULL, mask = FALSE, mo
     
     if (mask && mode %in% c("all", "trend_with_test")) {
       plot2 <- ggplot(data_plot2, aes(x = V1, y = V2, color = V5)) +
-        geom_point(aes(shape = factor(V8)), size = 0.9 * scale) +
+        geom_point(aes(shape = factor(V8)), size = scale, stroke = 0.2 * scale) +
         scale_color_gradientn(colors = color_palettes$trend, limits = c(-CV, CV)) +
         scale_shape_manual(
           values = c(19, 21),
@@ -185,7 +185,7 @@ TH_plots <- function(results, scale = NULL, output_file = NULL, mask = FALSE, mo
         coord_cartesian(xlim = c(0, n), ylim = c(0, n))
     } else {
       plot2 <- ggplot(data_plot2, aes(x = V1, y = V2, color = V5)) +
-        geom_point(size = 0.9 * scale) +
+        geom_point(size = scale, stroke = 0.2 * scale) +
         scale_color_gradientn(colors = color_palettes$trend, limits = c(-CV, CV)) +
         labs(
           title = "MOVING TREND ANALYSIS\nTrends of all possible sub-series",
@@ -201,7 +201,7 @@ TH_plots <- function(results, scale = NULL, output_file = NULL, mask = FALSE, mo
   if (!mask && mode %in% c("all", "avg_with_test")) {
     data_plot3 <- subset(results, V4 <= 0.2 & !is.na(V4))
     plot3 <- ggplot(data_plot3, aes(x = V1, y = V2, color = V4)) +
-      geom_point(size = 0.9 * scale) +
+      geom_point(size = scale, stroke = 0.2 * scale) +
       scale_color_gradientn(colors = color_palettes$pval, limits = c(0, 0.2)) +
       labs(
         title = "MOVING AVERAGE ANALYSIS\nP-values of T-tests on averages",
@@ -216,7 +216,7 @@ TH_plots <- function(results, scale = NULL, output_file = NULL, mask = FALSE, mo
   if (!mask && mode %in% c("all", "trend_with_test")) {
     data_plot4 <- subset(results, V6 <= 0.2 & !is.na(V6))
     plot4 <- ggplot(data_plot4, aes(x = V1, y = V2, color = V6)) +
-      geom_point(size = 0.9 * scale) +
+      geom_point(size = scale, stroke = 0.2 * scale) +
       scale_color_gradientn(colors = color_palettes$pval, limits = c(0, 0.2)) +
       labs(
         title = "MOVING TREND ANALYSIS\nP-values of Kendall's trend tests",

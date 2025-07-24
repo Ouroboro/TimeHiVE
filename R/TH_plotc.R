@@ -134,7 +134,7 @@ TH_plotc <- function(results, scale = NULL, output_file = NULL, mask = FALSE, mo
     
     if (mask && mode %in% c("all", "pearson_with_p")) {
       plot1 <- ggplot(data_plot1, aes(x = V1, y = V2, color = V3)) +
-        geom_point(aes(shape = factor(V7)), size = 0.9 * scale) +
+        geom_point(aes(shape = factor(V7)), size = scale, stroke = 0.2 * scale) +
         scale_color_gradientn(colors = color_palettes$cor, limits = c(-1, 1)) +
         scale_shape_manual(
           values = c(19, 21),
@@ -149,7 +149,7 @@ TH_plotc <- function(results, scale = NULL, output_file = NULL, mask = FALSE, mo
         coord_cartesian(xlim = c(0, n), ylim = c(0, n))
     } else {
       plot1 <- ggplot(data_plot1, aes(x = V1, y = V2, color = V3)) +
-        geom_point(size = 0.9 * scale) +
+        geom_point(size = scale, stroke = 0.2 * scale) +
         scale_color_gradientn(colors = color_palettes$cor, limits = c(-1, 1)) +
         labs(
           title = "PEARSON CORRELATION ANALYSIS\nCorrelation coefficients",
@@ -167,7 +167,7 @@ TH_plotc <- function(results, scale = NULL, output_file = NULL, mask = FALSE, mo
     
     if (mask && mode %in% c("all", "kendall_with_p")) {
       plot2 <- ggplot(data_plot2, aes(x = V1, y = V2, color = V5)) +
-        geom_point(aes(shape = factor(V8)), size = 0.9 * scale) +
+        geom_point(aes(shape = factor(V8)), size = scale, stroke = 0.2 * scale) +
         scale_color_gradientn(colors = color_palettes$cor, limits = c(-1, 1)) +
         scale_shape_manual(
           values = c(19, 21),
@@ -182,7 +182,7 @@ TH_plotc <- function(results, scale = NULL, output_file = NULL, mask = FALSE, mo
         coord_cartesian(xlim = c(0, n), ylim = c(0, n))
     } else {
       plot2 <- ggplot(data_plot2, aes(x = V1, y = V2, color = V5)) +
-        geom_point(size = 0.9 * scale) +
+        geom_point(size = scale, stroke = 0.2 * scale) +
         scale_color_gradientn(colors = color_palettes$cor, limits = c(-1, 1)) +
         labs(
           title = "MANN-KENDALL CORRELATION ANALYSIS\nCorrelation coefficients",
@@ -198,7 +198,7 @@ TH_plotc <- function(results, scale = NULL, output_file = NULL, mask = FALSE, mo
   if (!mask && mode %in% c("all", "pearson_with_p")) {
     data_plot3 <- subset(results, V4 <= 0.2 & !is.na(V4))
     plot3 <- ggplot(data_plot3, aes(x = V1, y = V2, color = V4)) +
-      geom_point(size = 0.9 * scale) +
+      geom_point(size = scale, stroke = 0.2 * scale) +
       scale_color_gradientn(colors = color_palettes$pval, limits = c(0, 0.2)) +
       labs(
         title = "PEARSON CORRELATION ANALYSIS\nP-values of Pearson Correlation Coefficient",
@@ -213,7 +213,7 @@ TH_plotc <- function(results, scale = NULL, output_file = NULL, mask = FALSE, mo
   if (!mask && mode %in% c("all", "kendall_with_p")) {
     data_plot4 <- subset(results, V6 <= 0.2 & !is.na(V6))
     plot4 <- ggplot(data_plot4, aes(x = V1, y = V2, color = V6)) +
-      geom_point(size = 0.9 * scale) +
+      geom_point(size = scale, stroke = 0.2 * scale) +
       scale_color_gradientn(colors = color_palettes$pval, limits = c(0, 0.2)) +
       labs(
         title = "MANN-KENDALL CORRELATION ANALYSIS\nP-values of Mann-Kendall Correlation Coefficient",
