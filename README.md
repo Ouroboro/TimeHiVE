@@ -14,6 +14,23 @@ TimeHiVE provides efficient R functions for hierarchical moving-window analysis 
 - Customizable visualization of time-dependent relationships
 - Statistical significance testing with adjustable thresholds
 
+The software package here proposed allows to perform analyses on time series avoiding the arbitrary choice of the time window and allowing to appreciate the whole spectrum of possible results offered by this kind of statistical tools.
+
+![Original Time Series](images/Fig1.jpg)
+*Figure 1: Different Moving Average vs Original Syntetic Time Series. Color scale on y-axis is meant only to match colors in Fig. 2*
+
+![TimeHiVE Moving Average](images/Fig2.jpg)
+*Figure 2: Representation of all the possible moving averages for the Original Syntetic Time Series, moving averages analyses represented in Fig. 1 are highlighted with comments on the results.*
+
+![Original Coupled Series](images/Fig3.jpg)
+*Figure 3: Representation of two Time Series positively correlated for short periods but negatively correlated for long periods. The series are built as: `TS1 = 40 + 2*sin(t/2) - t/20 - rand(-2/3, 2/3)` and `TS2 = 15 + 2*sin(t/2) + t/7 - rand(-2/3, 2/3)`. The sine component creates short-term positive correlation, while the `t/n` terms drive long-term negative correlation.*
+
+![Original Time Series](images/Fig4.jpg)
+*Figure 4: Here we show the Moving Correlation Analysis for the coupled Time Series represented in Fig. 4, the first row shows the results for Pearson’s correlation coefficient (Top Left) and relative p-values (Top Right), the second row shows the same analysis with MK’s correlation coefficients (Bottom Left) and relative p-values (Bottom Right). The inversion of the correlation between short and long period of analysis is quite clear.*
+
+FIRST ROW: Pearson’s correlation coefficient (Top Left) and relative p-values (Top Right).
+SECOND ROW: same analysis with MK’s correlation coefficientes (Bottom Left) and relative p-values (Bottom Right). The inversion of the correlation between short and long period of analysis is quite clear.
+
 ## Installation
 
 You can install the development version from GitHub with:
