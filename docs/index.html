@@ -59,10 +59,10 @@
 <li>Statistical significance testing with adjustable thresholds</li>
 </ul>
 <p>The software package here proposed allows to perform analyses on time series avoiding the arbitrary choice of the time window and allowing to appreciate the whole spectrum of possible results offered by this kind of statistical tools.</p>
-<p><img src="images/Fig1.png" alt="Original Time Series"><em>Figure 1: Different Moving Average vs Original Syntetic Time Series. Color scale on y-axis is meant only to match colors in Fig. 2</em></p>
-<p><img src="images/Fig2.png" alt="TimeHiVE Moving Average"><em>Figure 2: Representation of all the possible moving averages for the Original Syntetic Time Series, moving averages analyses represented in Fig. 1 are highlighted with comments on the results.</em></p>
-<p><img src="images/Fig3.png" alt="Original Coupled Series"><em>Figure 3: Representation of two Time Series positively correlated for short periods but negatively correlated for long periods. The series are built as: <code>TS1 = 40 + 2*sin(t/2) - t/20 - rand(-2/3, 2/3)</code> and <code>TS2 = 15 + 2*sin(t/2) + t/7 - rand(-2/3, 2/3)</code>. The sine component creates short-term positive correlation, while the <code>t/n</code> terms drive long-term negative correlation.</em></p>
-<p><img src="images/Fig4.png" alt="Original Time Series"><em>Figure 4: Here we show the Moving Correlation Analysis for the coupled Time Series represented in Fig. 4, the first row shows the results for Pearson’s correlation coefficient (Top Left) and relative p-values (Top Right), the second row shows the same analysis with MK’s correlation coefficients (Bottom Left) and relative p-values (Bottom Right). The inversion of the correlation between short and long period of analysis is quite clear.</em></p>
+<p><img src="reference/figures/Fig1.png" alt="Original Time Series"><em>Figure 1: Different Moving Average vs Original Syntetic Time Series. Color scale on y-axis is meant only to match colors in Fig. 2</em></p>
+<p><img src="reference/figures/Fig2.png" alt="TimeHiVE Moving Average"><em>Figure 2: Representation of all the possible moving averages for the Original Syntetic Time Series, moving averages analyses represented in Fig. 1 are highlighted with comments on the results.</em></p>
+<p><img src="reference/figures/Fig3.png" alt="Original Coupled Series"><em>Figure 3: Representation of two Time Series positively correlated for short periods but negatively correlated for long periods. The series are built as: <code>TS1 = 40 + 2*sin(t/2) - t/20 - rand(-2/3, 2/3)</code> and <code>TS2 = 15 + 2*sin(t/2) + t/7 - rand(-2/3, 2/3)</code>. The sine component creates short-term positive correlation, while the <code>t/n</code> terms drive long-term negative correlation.</em></p>
+<p><img src="reference/figures/Fig4.png" alt="Original Time Series"><em>Figure 4: Here we show the Moving Correlation Analysis for the coupled Time Series represented in Fig. 4, the first row shows the results for Pearson’s correlation coefficient (Top Left) and relative p-values (Top Right), the second row shows the same analysis with MK’s correlation coefficients (Bottom Left) and relative p-values (Bottom Right). The inversion of the correlation between short and long period of analysis is quite clear.</em></p>
 <p>FIRST ROW: Pearson’s correlation coefficient (Top Left) and relative p-values (Top Right). SECOND ROW: same analysis with MK’s correlation coefficientes (Bottom Left) and relative p-values (Bottom Right). The inversion of the correlation between short and long period of analysis is quite clear.</p>
 </div>
 <div class="section level2">
@@ -110,8 +110,8 @@
 <span><span class="va">Fig6</span> <span class="op">&lt;-</span> <span class="st">"Fig6.png"</span></span>
 <span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/TH_plotc.html">TH_plotc</a></span><span class="op">(</span><span class="va">results2</span>, output_file <span class="op">=</span> <span class="va">Fig5</span><span class="op">)</span></span>
 <span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/TH_plotc.html">TH_plotc</a></span><span class="op">(</span><span class="va">results2</span>, output_file <span class="op">=</span> <span class="va">Fig6</span>, mask <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
-<p><img src="images/Fig5.png" alt="Unmasked"><em>Output for Fig. 5 unmasked.</em></p>
-<p><img src="images/Fig6.png" alt="Masked"><em>Output for Fig. 6 masked.</em></p>
+<p><img src="reference/figures/Fig5.png" alt="Unmasked"><em>Output for Fig. 5 unmasked.</em></p>
+<p><img src="reference/figures/Fig6.png" alt="Masked"><em>Output for Fig. 6 masked.</em></p>
 <p>If the moving-window statistical analyses proposed by the previous functions are not sufficient, functions <code><a href="reference/TH_tweak.html">TH_tweak()</a></code> and <code><a href="reference/TH_plott.html">TH_plott()</a></code> allow you to use custom functions and possibly customize the color scales and tile intervals during the display phase. An exhaustive example follows shortly.</p>
 <pre><code><span><span class="co">### START Customized Functions ###</span></span>
 <span></span>
@@ -174,7 +174,7 @@
 <span>                <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">35</span><span class="op">)</span>,</span>
 <span>                <span class="cn">NULL</span>,</span>
 <span>                <span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></span></code></pre>
-<p><img src="images/Fig7.png" alt="Single Series Tweak"><em>Output for Fig. 7 single series tweak.</em></p>
+<p><img src="reference/figures/Fig7.png" alt="Single Series Tweak"><em>Output for Fig. 7 single series tweak.</em></p>
 <pre><code><span><span class="co">### START Customized Functions ###</span></span>
 <span></span>
 <span><span class="va">pearson_fun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span><span class="op">$</span><span class="va">estimate</span></span>
@@ -208,7 +208,7 @@
 <span>colorscales <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"white"</span>, <span class="st">"red"</span><span class="op">)</span>,</span>
 <span>                   <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"yellow"</span>, <span class="st">"purple"</span><span class="op">)</span>,</span>
 <span>                   <span class="st">"avg"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
-<p><img src="images/Fig8.png" alt="Coupled Series Tweak"><em>Output for Fig. 8 coupled series tweak.</em></p>
+<p><img src="reference/figures/Fig8.png" alt="Coupled Series Tweak"><em>Output for Fig. 8 coupled series tweak.</em></p>
 </div>
 <div class="section level3">
 <h3 id="main-functions">Main Functions<a class="anchor" aria-label="anchor" href="#main-functions"></a>

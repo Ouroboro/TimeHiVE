@@ -16,16 +16,16 @@ TimeHiVE provides efficient R functions for hierarchical moving-window analysis 
 
 The software package here proposed allows to perform analyses on time series avoiding the arbitrary choice of the time window and allowing to appreciate the whole spectrum of possible results offered by this kind of statistical tools.
 
-![Original Time Series](images/Fig1.png)
+![Original Time Series](man/figures/Fig1.png)
 *Figure 1: Different Moving Average vs Original Syntetic Time Series. Color scale on y-axis is meant only to match colors in Fig. 2*
 
-![TimeHiVE Moving Average](images/Fig2.png)
+![TimeHiVE Moving Average](man/figures/Fig2.png)
 *Figure 2: Representation of all the possible moving averages for the Original Syntetic Time Series, moving averages analyses represented in Fig. 1 are highlighted with comments on the results.*
 
-![Original Coupled Series](images/Fig3.png)
+![Original Coupled Series](man/figures/Fig3.png)
 *Figure 3: Representation of two Time Series positively correlated for short periods but negatively correlated for long periods. The series are built as: `TS1 = 40 + 2*sin(t/2) - t/20 - rand(-2/3, 2/3)` and `TS2 = 15 + 2*sin(t/2) + t/7 - rand(-2/3, 2/3)`. The sine component creates short-term positive correlation, while the `t/n` terms drive long-term negative correlation.*
 
-![Original Time Series](images/Fig4.png)
+![Original Time Series](man/figures/Fig4.png)
 *Figure 4: Here we show the Moving Correlation Analysis for the coupled Time Series represented in Fig. 4, the first row shows the results for Pearson’s correlation coefficient (Top Left) and relative p-values (Top Right), the second row shows the same analysis with MK’s correlation coefficients (Bottom Left) and relative p-values (Bottom Right). The inversion of the correlation between short and long period of analysis is quite clear.*
 
 FIRST ROW: Pearson’s correlation coefficient (Top Left) and relative p-values (Top Right).
@@ -78,10 +78,10 @@ p <- TH_plotc(results2, output_file = Fig5)
 p <- TH_plotc(results2, output_file = Fig6, mask = TRUE)
 ```
 
-![Unmasked](images/Fig5.png)
+![Unmasked](man/figures/Fig5.png)
 *Output for Fig. 5 unmasked.*
 
-![Masked](images/Fig6.png)
+![Masked](man/figures/Fig6.png)
 *Output for Fig. 6 masked.*
 
 If the moving-window statistical analyses proposed by the previous functions are not sufficient, functions `TH_tweak()` and `TH_plott()` allow you to use custom functions and possibly customize the color scales and tile intervals during the display phase. An exhaustive example follows shortly.
@@ -150,7 +150,7 @@ p <- TH_plott(results, output_file = Fig7,
                 NULL))
 ```
 
-![Single Series Tweak](images/Fig7.png)
+![Single Series Tweak](man/figures/Fig7.png)
 *Output for Fig. 7 single series tweak.*
 
 ```
@@ -190,7 +190,7 @@ colorscales = list(c("blue", "white", "red"),
 
 ```
 
-![Coupled Series Tweak](images/Fig8.png)
+![Coupled Series Tweak](man/figures/Fig8.png)
 *Output for Fig. 8 coupled series tweak.*
 
 
