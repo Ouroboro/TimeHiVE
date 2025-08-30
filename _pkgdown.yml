@@ -13,8 +13,10 @@ reference:
     contents:
     - TH_single
     - TH_coupled
+    - TH_tweak
     - TH_plots
     - TH_plotc
+    - TH_plott
     - TH_MK_Trend
     - TH_MK_Corr
 navbar:

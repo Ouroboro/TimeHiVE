@@ -7,22 +7,26 @@
 TH_MK_Corr(x, y, alternative = c("two.sided", "greater", "less"))
 }
 \arguments{
-\item{`x`}{a \verb{numerical vector}.}
+\item{x}{a \verb{numerical vector}}
 
-\item{`alternative`}{Type of alternative hypothesis ("two.sided", "greater", "less")}
+\item{y}{a \verb{numerical vector}}
+
+\item{alternative}{Type of alternative hypothesis ("two.sided", "greater", "less")}
 }
 \value{
 A \code{htest} object with results
-\item{statistic}{Mann-Kendall tau statistic}
+\item{statistic}{Kendall's tau-b statistic}
 \item{p.value}{p-value}
-\item{alt}{Alternative Hypotesis}
+\item{alternative}{Alternative hypothesis description}
 }
 \description{
 Efficient implementation of the Mann-Kendall test for correlation using
-Knight's algorithm of (O(n log n) complexity).
+Knight's algorithm of (O(n log n) complexity). Handles ties correctly.
 }
 \examples{
- \dontrun{
+\dontrun{
+kt <- TH_MK_Corr(sub_series1, sub_series2, alternative = "less")
+c(kt$statistic, kt$p.value)
 }
 }
 \author{
