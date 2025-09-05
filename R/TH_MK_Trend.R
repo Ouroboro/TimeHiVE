@@ -1,122 +1,126 @@
 #' Mann-Kendall Trend Test with Knight's Algorithm
 #' @description
 #' Efficient implementation of the Mann-Kendall test for trend detection using
-#' merge sort algorithm (O(n log^2 n) complexity).
+#' merge sort algorithm (O(n log n) complexity).
 #'
-#' @param `data_series` a `numerical vector` containing NA for missing values.
+#' @param data_series a `numerical vector` containing NA for missing values.
 #' @return A list with components:
 #' \item{S}{Mann-Kendall S statistic}
 #' \item{Var.S}{Variance of S}
 #' \item{Z}{Z-score}
 #' \item{p.value}{Two-sided p-value}
 #' @export
-#' @import ggplot2
-#' @importFrom gridExtra grid.arrange
-#' @importFrom grDevices colorRampPalette
 #' @author Vladimiro Andrea Boselli, (2025) \email{boselli.v@@irea.cnr.it}
 #' @examples
-#'  \dontrun{
+#' \dontrun{
 #' data <- c(1.2, 3.4, 2.5, 4.1, 5.6)
 #' result <- TH_MK_Trend(data)
 #' }
-### function TH_MK_Trend
 
 TH_MK_Trend <- function(data_series) {
+  #Clean NA
+  data_series <- data_series[!is.na(data_series)]
+  n <- length(data_series)
   
-  ### MERGE SORT WITH SWAPS
+  ### MERGE SORT
   
-  merge_sort_with_swaps <- function(vec) {
-    
-    # Initialize the trade count
-    swap_count <- 0
-    
-    # Merge function
-    merge <- function(left, right) {
-      merged <- c()
-      i <- 1
-      j <- 1
+  count_inversions <- function(arr) {
+    # Count Inversions
+    merge_count <- function(arr, l, m, r) {
+      left <- arr[l:m]
+      right <- arr[(m+1):r]
+      i <- j <- 1
+      k <- l
+      inv_count <- 0
+      left_len <- length(left)
+      right_len <- length(right)
       
-      while (i <= length(left) && j <= length(right)) {
+      while (i <= left_len && j <= right_len) {
         if (left[i] <= right[j]) {
-          merged <- c(merged, left[i])
+          arr[k] <- left[i]
           i <- i + 1
         } else {
-          merged <- c(merged, right[j])
+          arr[k] <- right[j]
           j <- j + 1
-          swap_count <<- swap_count + (length(left) - i + 1)
+          inv_count <- inv_count + (left_len - i + 1)
         }
+        k <- k + 1
       }
       
-      # Add missing elements
-      if (i <= length(left)) {
-        merged <- c(merged, left[i:length(left)])
-      }
-      if (j <= length(right)) {
-        merged <- c(merged, right[j:length(right)])
+      while (i <= left_len) {
+        arr[k] <- left[i]
+        i <- i + 1
+        k <- k + 1
       }
       
-      return(merged)
+      while (j <= right_len) {
+        arr[k] <- right[j]
+        j <- j + 1
+        k <- k + 1
+      }
+      
+      list(arr = arr, inv = inv_count)
     }
     
     # Recursive function for merge sort
-    merge_sort <- function(vec) {
-      if (length(vec) <= 1) {
-        return(vec)
+    merge_sort_count <- function(arr, l, r) {
+      inv_total <- 0
+      
+      if (l < r) {
+        m <- floor((l + r) / 2)
+        
+        # Order
+        left_res <- merge_sort_count(arr, l, m)
+        arr <- left_res$arr
+        inv_total <- inv_total + left_res$inv
+        
+        right_res <- merge_sort_count(arr, m+1, r)
+        arr <- right_res$arr
+        inv_total <- inv_total + right_res$inv
+        
+        # Merge
+        merge_res <- merge_count(arr, l, m, r)
+        arr <- merge_res$arr
+        inv_total <- inv_total + merge_res$inv
       }
       
-      mid <- floor(length(vec) / 2)
-      left <- merge_sort(vec[1:mid])
-      right <- merge_sort(vec[(mid + 1):length(vec)])
-      
-      return(merge(left, right))
+      list(arr = arr, inv = inv_total)
     }
     
-    # Sort the vector and calculate the number of exchanges
-    merge_sort(vec)
-    
-    # Return the number of trades
-    return(swap_count)
+    result <- merge_sort_count(arr, 1, length(arr))
+    return(result$inv)
   }
   
   ### COUNT OCCURENCIES
   
   count_occurrences <- function(vec) {
-    # Initialize a list to store the counts
-    counts <- list()
+    # Order (O(n log n))
+    sorted_vec <- sort(vec)
     
-    # Count the occurrences of each element
-    for (val in vec) {
-      if (!is.null(counts[[as.character(val)]])) {
-        counts[[as.character(val)]] <- counts[[as.character(val)]] + 1
-      } else {
-        counts[[as.character(val)]] <- 1
-      }
-    }
+    # Count (O(n))
+    runs <- rle(sorted_vec)$lengths
     
-    # Filter occurrences greater than 1
-    result <- unlist(counts[counts > 1])
+    # Filter
+    result <- runs[runs > 1]
     
-    # Return the vector with occurrences
     return(result)
   }
   
-  ### START HERE TH_MK_Trend() FUNCTION
+  ### STATS
   
-  n <- length(data_series)
-  
-  ### MATH CORE TO COMPUTE S
-  P <- merge_sort_with_swaps(data_series) #Number of exchanges to order the vector
-  O <- count_occurrences(data_series) #Number of repeated elements
-  adjO <- sum((O*(O-1)/2))
-  S <- n*(n-1)/2 - adjO - P*2
-  ###
+  P <- count_inversions(data_series)
+  O <- count_occurrences(data_series)
+  adjO <- sum(O * (O - 1) / 2)
+  S <- n * (n - 1) / 2 - adjO - 2 * P
   
   VarS <- (n * (n - 1) * (2 * n + 5)) / 18
   
-  if (S >= 0) {
+  if (S > 0) {
     Z <- (S - 1) / sqrt(VarS)
-  } else {
+  } else if (S < 0) {
     Z <- (S + 1) / sqrt(VarS)
+  } else {
+    Z <- 0
   }
   
   p.value <- 0.5 - abs(0.5 - pnorm(Z))
