@@ -2,7 +2,7 @@ name: Build JOSS Paper
 
 on:
   push:
-    branches: [paper]
+    branches: [joss-paper]
     paths: ['joss-paper/paper/**']  # Monitora la cartella joss-paper/paper/
 
 jobs:
