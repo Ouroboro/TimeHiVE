@@ -1,0 +1,38 @@
+name: Build JOSS Paper
+
+on:
+  push:
+    branches: [paper]
+    paths: ['joss-paper/paper/**']  # Monitora la cartella joss-paper/paper/
+
+jobs:
+  paper:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Debug - Check files
+        run: |
+          echo "=== File structure in joss-paper/paper/ ==="
+          ls -la joss-paper/paper/
+          echo "=== Content of paper.md (first 20 lines) ==="
+          head -20 joss-paper/paper/paper.md
+          echo "=== Content of paper.bib (first 10 lines) ==="
+          head -10 joss-paper/paper/paper.bib
+        
+      - name: Build PDF with Docker
+        run: |
+          docker run --rm \
+            --volume $PWD/joss-paper/paper:/data \
+            --user $(id -u):$(id -g) \
+            --env JOURNAL=joss \
+            openjournals/inara
+          
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper-pdf
+          path: joss-paper/paper/paper.pdf
