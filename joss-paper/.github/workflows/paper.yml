@@ -3,7 +3,7 @@ name: Build JOSS Paper
 on:
   push:
     branches: [paper]
-    paths: ['joss-paper/paper/**']
+    paths: ['paper/**']
 
 jobs:
   paper:
