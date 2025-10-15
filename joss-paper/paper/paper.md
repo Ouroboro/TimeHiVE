@@ -29,6 +29,7 @@ TimeHiVE by @Bos2025 is an R package designed for hierarchical moving-window sta
 
 The package provides implementations for both single time series analysis (including means, trends, and custom statistics) and coupled time series analysis (including Pearson and Mann-Kendall correlations). TimeHiVE features Mann-Kendall statistics algorithms with O(n log n) time complexity, parallel computation capabilities, and customisable visualization tools. These features make it particularly valuable for environmental and climate research, where understanding phenomena across multiple timescales is essential.
 
+
 # Statement of need
 
 Moving-window statistical analysis is a fundamental technique in time series analysis, used to study the evolution of data over time in a dynamic and localized manner. This approach involves calculating statistics on subsets of consecutive data points that progressively move along the series. The technique helps identify localized trends, seasonality, and anomalies while reducing the impact of random fluctuations, highlighting meaningful patterns.
