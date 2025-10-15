@@ -2,7 +2,7 @@ name: Build JOSS Paper
 
 on:
   push:
-    branches: [joss-paper]
+    branches: [paper]
     paths: ['paper/**']
 
 jobs:
