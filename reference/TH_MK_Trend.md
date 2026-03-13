@@ -1,7 +1,7 @@
 # Mann-Kendall Trend Test with Knight's Algorithm
 
 Efficient implementation of the Mann-Kendall test for trend detection
-using merge sort algorithm (O(n log^2 n) complexity).
+using merge sort algorithm (O(n log n) complexity).
 
 ## Usage
 
@@ -11,7 +11,7 @@ TH_MK_Trend(data_series)
 
 ## Arguments
 
-- \`data_series\`:
+- data_series:
 
   a `numerical vector` containing NA for missing values.
 
@@ -42,7 +42,7 @@ Vladimiro Andrea Boselli, (2025) <boselli.v@irea.cnr.it>
 ## Examples
 
 ``` r
- if (FALSE) { # \dontrun{
+if (FALSE) { # \dontrun{
 data <- c(1.2, 3.4, 2.5, 4.1, 5.6)
 result <- TH_MK_Trend(data)
 } # }

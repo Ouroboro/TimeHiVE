@@ -12,27 +12,27 @@ TH_single(series, m = NULL, s = NULL, mode = "all", alpha = 0.1)
 
 ## Arguments
 
-- \`series\`:
+- series:
 
   a `numerical vector` containing NA for missing values.
 
-- \`m\`:
+- m:
 
   a `numeric` positive integer, sub-sampling parameter. Optional
   (default: auto-calculated).
 
-- \`s\`:
+- s:
 
   a `numeric` positive integer, cutoff parameters for sub-series length.
   Optional (default: auto-calculated).
 
-- \`mode\`:
+- mode:
 
   a `character` string specifying the computation mode. One of: "all"
   (default), "avg_only", "trend_only", "avg_trend", "trend_with_test",
   "avg_with_test".
 
-- \`alpha\`:
+- alpha:
 
   a `numeric` significance level for t-test flag (default: 0.1).
 

@@ -17,24 +17,24 @@ TH_plott(
 
 ## Arguments
 
-- \`results\`:
+- results:
 
   is a `data.frame` created by TH_tweak().
 
-- \`scale\`:
+- scale:
 
   a `numeric`, scaling factor for point sizes, autoset by default.
 
-- \`output_file\`:
+- output_file:
 
   is a `string`, optional, filename to save plot (NULL to skip saving).
 
-- \`colorscales\`:
+- colorscales:
 
   a `list` of color scales for each function (optional). Can mix
   predefined names ("avg", "trend", "pval") and custom color vectors.
 
-- \`colorlimits\`:
+- colorlimits:
 
   a `list` of numeric vectors specifying color limits for each function
   (optional). Each element should be a vector of length 2 (c(min, max)).

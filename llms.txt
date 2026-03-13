@@ -15,31 +15,30 @@ series avoiding the arbitrary choice of the time window and allowing to
 appreciate the whole spectrum of possible results offered by this kind
 of statistical tools.
 
-![Original Time Series](reference/figures/Fig1.png)*Figure 1: Different
-Moving Average vs Original Syntetic Time Series. Color scale on y-axis
-is meant only to match colors in Fig. 2*
+![Original Time Series](img/Fig1.png)*Figure 1: Different Moving Average
+vs Original Syntetic Time Series. Color scale on y-axis is meant only to
+match colors in Fig. 2*
 
-![TimeHiVE Moving Average](reference/figures/Fig2.png)*Figure 2:
-Representation of all the possible moving averages for the Original
-Syntetic Time Series, moving averages analyses represented in Fig. 1 are
-highlighted with comments on the results.*
+![TimeHiVE Moving Average](img/Fig2.png)*Figure 2: Representation of all
+the possible moving averages for the Original Syntetic Time Series,
+moving averages analyses represented in Fig. 1 are highlighted with
+comments on the results.*
 
-![Original Coupled Series](reference/figures/Fig3.png)*Figure 3:
-Representation of two Time Series positively correlated for short
-periods but negatively correlated for long periods. The series are built
-as: `TS1 = 40 + 2*sin(t/2) - t/20 - rand(-2/3, 2/3)` and
+![Original Coupled Series](img/Fig3.png)*Figure 3: Representation of two
+Time Series positively correlated for short periods but negatively
+correlated for long periods. The series are built as:
+`TS1 = 40 + 2*sin(t/2) - t/20 - rand(-2/3, 2/3)` and
 `TS2 = 15 + 2*sin(t/2) + t/7 - rand(-2/3, 2/3)`. The sine component
 creates short-term positive correlation, while the `t/n` terms drive
 long-term negative correlation.*
 
-![Original Time Series](reference/figures/Fig4.png)*Figure 4: Here we
-show the Moving Correlation Analysis for the coupled Time Series
-represented in Fig. 4, the first row shows the results for Pearson’s
-correlation coefficient (Top Left) and relative p-values (Top Right),
-the second row shows the same analysis with MK’s correlation
-coefficients (Bottom Left) and relative p-values (Bottom Right). The
-inversion of the correlation between short and long period of analysis
-is quite clear.*
+![Original Time Series](img/Fig4.png)*Figure 4: Here we show the Moving
+Correlation Analysis for the coupled Time Series represented in Fig. 4,
+the first row shows the results for Pearson’s correlation coefficient
+(Top Left) and relative p-values (Top Right), the second row shows the
+same analysis with MK’s correlation coefficients (Bottom Left) and
+relative p-values (Bottom Right). The inversion of the correlation
+between short and long period of analysis is quite clear.*
 
 FIRST ROW: Pearson’s correlation coefficient (Top Left) and relative
 p-values (Top Right). SECOND ROW: same analysis with MK’s correlation
@@ -95,9 +94,9 @@ previously.
     p <- TH_plotc(results2, output_file = Fig5)
     p <- TH_plotc(results2, output_file = Fig6, mask = TRUE)
 
-![Unmasked](reference/figures/Fig5.png)*Output for Fig. 5 unmasked.*
+![Unmasked](img/Fig5.png)*Output for Fig. 5 unmasked.*
 
-![Masked](reference/figures/Fig6.png)*Output for Fig. 6 masked.*
+![Masked](img/Fig6.png)*Output for Fig. 6 masked.*
 
 If the moving-window statistical analyses proposed by the previous
 functions are not sufficient, functions
@@ -170,8 +169,8 @@ example follows shortly.
                     NULL,
                     NULL))
 
-![Single Series Tweak](reference/figures/Fig7.png)*Output for Fig. 7
-single series tweak.*
+![Single Series Tweak](img/Fig7.png)*Output for Fig. 7 single series
+tweak.*
 
     ### START Customized Functions ###
 
@@ -207,8 +206,8 @@ single series tweak.*
                        c("green", "yellow", "purple"),
                        "avg"))
 
-![Coupled Series Tweak](reference/figures/Fig8.png)*Output for Fig. 8
-coupled series tweak.*
+![Coupled Series Tweak](img/Fig8.png)*Output for Fig. 8 coupled series
+tweak.*
 
 ### Main Functions
 

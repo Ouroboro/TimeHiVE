@@ -21,37 +21,37 @@ TH_coupled(
 
 ## Arguments
 
-- alternative:
-
-  Optional, "two.sided" (Default), "greater", "less".
-
-- \`series1\`:
+- series1:
 
   a `numerical vector` containing NA for missing values.
 
-- \`series2\`:
+- series2:
 
   a `numerical vector` containing NA for missing values. It must be of
   the same length of `series1`.
 
-- \`m\`:
+- m:
 
   a `numeric` positive integer, subsampling parameter. Optional
   (default: autocalculated).
 
-- \`s\`:
+- s:
 
   a `numeric` positive integer, cutoff parameters for subseries legth.
   Optional (default: autocalculated).
 
-- \`mode\`:
+- alpha:
+
+  a `numeric` significance level for flagging (default: 0.1).
+
+- mode:
 
   a `character` string specifying the computation mode. One of: "all",
   "pearson", "kendall", "both", "pearson_with_p", "kendall_with_p".
 
-- \`alpha\`:
+- alternative:
 
-  a `numeric` significance level for flagging (default: 0.1).
+  Optional, "two.sided" (Default), "greater", "less".
 
 ## Value
 

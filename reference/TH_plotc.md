@@ -13,26 +13,26 @@ TH_plotc(results, scale = NULL, output_file = NULL, mask = FALSE, mode = NULL)
 
 ## Arguments
 
-- \`results\`:
+- results:
 
   is a `data.frame` created by to TH_coupled().
 
-- \`scale\`:
+- scale:
 
   a `numeric`, scaling factor for point sizes, autoset by default.
 
-- \`output_file\`:
+- output_file:
 
   is a `string`, optional, filename to save plot (NULL to skip saving).
 
-- \`mask\`:
+- mask:
 
   a `logical` value. If TRUE, shows significance in main plots and hides
   p-value plots for modes without explicit p-value requests. Only
   applicable for modes: "all", "kendall_with_p", and "pearson_with_p".
   For other modes, a warning is issued and mask is ignored.
 
-- \`mode\`:
+- mode:
 
   a `character` string specifying plots to show: "all", "pearson",
   "kendall", "both", "pearson_with_p", "kendall_with_p".

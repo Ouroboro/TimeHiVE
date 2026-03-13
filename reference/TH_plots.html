@@ -49,28 +49,28 @@ input is a <code>data.frame</code> created by TH_single() function.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg--result-">`result`<a class="anchor" aria-label="anchor" href="#arg--result-"></a></dt>
+<dl><dt id="arg-results">results<a class="anchor" aria-label="anchor" href="#arg-results"></a></dt>
 <dd><p>is a <code>data.frame</code> created by to TH_single().</p></dd>
 
 
-<dt id="arg--scale-">`scale`<a class="anchor" aria-label="anchor" href="#arg--scale-"></a></dt>
+<dt id="arg-scale">scale<a class="anchor" aria-label="anchor" href="#arg-scale"></a></dt>
 <dd><p>a <code>numeric</code>, scaling factor for point sizes, autoset by
 default.</p></dd>
 
 
-<dt id="arg--output-file-">`output_file`<a class="anchor" aria-label="anchor" href="#arg--output-file-"></a></dt>
+<dt id="arg-output-file">output_file<a class="anchor" aria-label="anchor" href="#arg-output-file"></a></dt>
 <dd><p>is a <code>string</code>, optional, filename to save plot (NULL to
 skip saving), NULL by default.</p></dd>
 
 
-<dt id="arg--mask-">`mask`<a class="anchor" aria-label="anchor" href="#arg--mask-"></a></dt>
+<dt id="arg-mask">mask<a class="anchor" aria-label="anchor" href="#arg-mask"></a></dt>
 <dd><p>a <code>logical</code> value. If TRUE, enhances main plots by using point
 shapes to indicate statistical significance (if available). Only applicable
 for modes: "all", "trend_with_test", and "avg_with_test". For other modes,
 a warning is issued and mask is ignored.</p></dd>
 
 
-<dt id="arg--mode-">`mode`<a class="anchor" aria-label="anchor" href="#arg--mode-"></a></dt>
+<dt id="arg-mode">mode<a class="anchor" aria-label="anchor" href="#arg-mode"></a></dt>
 <dd><p>a <code>character</code> string specifying the computation mode. One of:
 "all", "avg_only", "trend_only", "avg_trend", "trend_with_test", "avg_with_test".
 By default it takes the mode passed as attribute by <code>results</code>.</p></dd>
@@ -78,7 +78,7 @@ By default it takes the mode passed as attribute by <code>results</code>.</p></d
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code>ggplot</code> or <code>gridExtra</code> arranged plot object.</p>
+    <p>A <code>ggplot</code> and/or <code>gridExtra</code> arranged plot object.</p>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>

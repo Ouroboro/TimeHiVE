@@ -12,27 +12,27 @@ TH_plots(results, scale = NULL, output_file = NULL, mask = FALSE, mode = NULL)
 
 ## Arguments
 
-- \`result\`:
+- results:
 
   is a `data.frame` created by to TH_single().
 
-- \`scale\`:
+- scale:
 
   a `numeric`, scaling factor for point sizes, autoset by default.
 
-- \`output_file\`:
+- output_file:
 
   is a `string`, optional, filename to save plot (NULL to skip saving),
   NULL by default.
 
-- \`mask\`:
+- mask:
 
   a `logical` value. If TRUE, enhances main plots by using point shapes
   to indicate statistical significance (if available). Only applicable
   for modes: "all", "trend_with_test", and "avg_with_test". For other
   modes, a warning is issued and mask is ignored.
 
-- \`mode\`:
+- mode:
 
   a `character` string specifying the computation mode. One of: "all",
   "avg_only", "trend_only", "avg_trend", "trend_with_test",
@@ -41,7 +41,7 @@ TH_plots(results, scale = NULL, output_file = NULL, mask = FALSE, mode = NULL)
 
 ## Value
 
-A `ggplot` or `gridExtra` arranged plot object.
+A `ggplot` and/or `gridExtra` arranged plot object.
 
 ## Author
 
