@@ -5,16 +5,16 @@
 #' correlation coefficient and Mann-Kendall correlation coefficient. The results
 #' are in a `data.frame` to be passed to TH_plotc() function.
 #'
-#' @param `series1` a `numerical vector` containing NA for missing values.
-#' @param `series2` a `numerical vector` containing NA for missing values. It
+#' @param series1 a `numerical vector` containing NA for missing values.
+#' @param series2 a `numerical vector` containing NA for missing values. It
 #' must be of the same length of `series1`.
-#' @param `m` a `numeric` positive integer, subsampling parameter. Optional
+#' @param m a `numeric` positive integer, subsampling parameter. Optional
 #' (default: autocalculated).
-#' @param `s` a `numeric` positive integer, cutoff parameters for subseries
+#' @param s a `numeric` positive integer, cutoff parameters for subseries
 #' legth. Optional (default: autocalculated).
-#' @param `mode` a `character` string specifying the computation mode. One of:
+#' @param mode a `character` string specifying the computation mode. One of:
 #' "all", "pearson", "kendall", "both", "pearson_with_p", "kendall_with_p".
-#' @param `alpha` a `numeric` significance level for flagging (default: 0.1).
+#' @param alpha a `numeric` significance level for flagging (default: 0.1).
 #' @param alternative Optional, "two.sided" (Default), "greater", "less".
 #' @return A result `data.frame` to pass to TH_plotc() with attributes.
 #' @export
@@ -128,10 +128,16 @@ TH_coupled <- function(series1, series2, m = NULL, s = NULL, alpha = 0.1,
   }
   
   # Parallel calculation
+  if (.Platform$OS.type == "windows") {
+    mc_cores <- 1
+  } else {
+    mc_cores <- max(1, parallel::detectCores() - 1)
+  }
+  
   results_list <- parallel::mclapply(
-    1:LEN_MAX, 
-    compute_correlation, 
-    mc.cores = parallel::detectCores() - 1
+    1:LEN_MAX,
+    compute_correlation,
+    mc.cores = mc_cores
   )
   
   # Convert to data.frame

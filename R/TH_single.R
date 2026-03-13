@@ -4,14 +4,14 @@
 #' series. It returns analysis on moving average and running trends. The results
 #' are in a `data.frame` to be passed to TH_plots() function.
 #' 
-#' @param `series` a `numerical vector` containing NA for missing values.
-#' @param `m` a `numeric` positive integer, sub-sampling parameter. Optional
+#' @param series a `numerical vector` containing NA for missing values.
+#' @param m a `numeric` positive integer, sub-sampling parameter. Optional
 #' (default: auto-calculated).
-#' @param `s` a `numeric` positive integer, cutoff parameters for sub-series
+#' @param s a `numeric` positive integer, cutoff parameters for sub-series
 #' length. Optional (default: auto-calculated).
-#' @param `mode` a `character` string specifying the computation mode. One of:
+#' @param mode a `character` string specifying the computation mode. One of:
 #' "all" (default), "avg_only", "trend_only", "avg_trend", "trend_with_test", "avg_with_test".
-#' @param `alpha` a `numeric` significance level for t-test flag (default: 0.1).
+#' @param alpha a `numeric` significance level for t-test flag (default: 0.1).
 #' @return A result `data.frame` to pass to TH_plots(), `s`, `m` and the length
 #' of the series are passed as silent attributes.
 #' @export
@@ -131,10 +131,16 @@ TH_single <- function(series, m = NULL, s = NULL, mode = "all", alpha = 0.1) {
   }
   
   # Parallel processing
+  if (.Platform$OS.type == "windows") {
+    mc_cores <- 1
+  } else {
+    mc_cores <- max(1, parallel::detectCores() - 1)
+  }
+  
   results_list <- parallel::mclapply(
-    1:LEN_MAX, 
-    process_subseries, 
-    mc.cores = parallel::detectCores() - 1
+    1:LEN_MAX,
+    process_subseries,
+    mc.cores = mc_cores
   )
   results <- do.call(rbind, results_list)
   

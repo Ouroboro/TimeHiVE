@@ -7,18 +7,18 @@
 TH_single(series, m = NULL, s = NULL, mode = "all", alpha = 0.1)
 }
 \arguments{
-\item{`series`}{a \verb{numerical vector} containing NA for missing values.}
+\item{series}{a \verb{numerical vector} containing NA for missing values.}
 
-\item{`m`}{a \code{numeric} positive integer, sub-sampling parameter. Optional
+\item{m}{a \code{numeric} positive integer, sub-sampling parameter. Optional
 (default: auto-calculated).}
 
-\item{`s`}{a \code{numeric} positive integer, cutoff parameters for sub-series
+\item{s}{a \code{numeric} positive integer, cutoff parameters for sub-series
 length. Optional (default: auto-calculated).}
 
-\item{`mode`}{a \code{character} string specifying the computation mode. One of:
+\item{mode}{a \code{character} string specifying the computation mode. One of:
 "all" (default), "avg_only", "trend_only", "avg_trend", "trend_with_test", "avg_with_test".}
 
-\item{`alpha`}{a \code{numeric} significance level for t-test flag (default: 0.1).}
+\item{alpha}{a \code{numeric} significance level for t-test flag (default: 0.1).}
 }
 \value{
 A result \code{data.frame} to pass to TH_plots(), \code{s}, \code{m} and the length

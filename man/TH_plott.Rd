@@ -13,15 +13,15 @@ TH_plott(
 )
 }
 \arguments{
-\item{`results`}{is a \code{data.frame} created by TH_tweak().}
+\item{results}{is a \code{data.frame} created by TH_tweak().}
 
-\item{`scale`}{a \code{numeric}, scaling factor for point sizes, autoset by default.}
+\item{scale}{a \code{numeric}, scaling factor for point sizes, autoset by default.}
 
-\item{`output_file`}{is a \code{string}, optional, filename to save plot (NULL to skip saving).}
+\item{output_file}{is a \code{string}, optional, filename to save plot (NULL to skip saving).}
 
-\item{`colorscales`}{a \code{list} of color scales for each function (optional). Can mix predefined names ("avg", "trend", "pval") and custom color vectors.}
+\item{colorscales}{a \code{list} of color scales for each function (optional). Can mix predefined names ("avg", "trend", "pval") and custom color vectors.}
 
-\item{`colorlimits`}{a \code{list} of numeric vectors specifying color limits for each function (optional). Each element should be a vector of length 2 (c(min, max)). If NULL, limits are calculated automatically.}
+\item{colorlimits}{a \code{list} of numeric vectors specifying color limits for each function (optional). Each element should be a vector of length 2 (c(min, max)). If NULL, limits are calculated automatically.}
 }
 \value{
 A \code{gridExtra} arranged plot object.

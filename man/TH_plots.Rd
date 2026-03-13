@@ -7,25 +7,25 @@
 TH_plots(results, scale = NULL, output_file = NULL, mask = FALSE, mode = NULL)
 }
 \arguments{
-\item{`result`}{is a \code{data.frame} created by to TH_single().}
+\item{results}{is a \code{data.frame} created by to TH_single().}
 
-\item{`scale`}{a \code{numeric}, scaling factor for point sizes, autoset by
+\item{scale}{a \code{numeric}, scaling factor for point sizes, autoset by
 default.}
 
-\item{`output_file`}{is a \code{string}, optional, filename to save plot (NULL to
+\item{output_file}{is a \code{string}, optional, filename to save plot (NULL to
 skip saving), NULL by default.}
 
-\item{`mask`}{a \code{logical} value. If TRUE, enhances main plots by using point
+\item{mask}{a \code{logical} value. If TRUE, enhances main plots by using point
 shapes to indicate statistical significance (if available). Only applicable
 for modes: "all", "trend_with_test", and "avg_with_test". For other modes,
 a warning is issued and mask is ignored.}
 
-\item{`mode`}{a \code{character} string specifying the computation mode. One of:
+\item{mode}{a \code{character} string specifying the computation mode. One of:
 "all", "avg_only", "trend_only", "avg_trend", "trend_with_test", "avg_with_test".
 By default it takes the mode passed as attribute by \code{results}.}
 }
 \value{
-A \code{ggplot} or \code{gridExtra} arranged plot object.
+A \code{ggplot} and/or \code{gridExtra} arranged plot object.
 }
 \description{
 Plots hierarchical moving-window statistical analysis for single time
