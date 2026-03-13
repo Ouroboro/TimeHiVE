@@ -3,7 +3,7 @@ on:
   push:
     branches: [main, joss-paper]
   pull_request:
-    branches: [main, joss-paper]
+    branches: [main]
 
 name: R-CMD-check
 
