@@ -184,8 +184,11 @@ test_that("TH_tweak basic functionality", {
   expect_equal(attr(res, "param"), 0.1)
   expect_equal(length(attr(res, "functions")), 2)
   
-  res_single <- TH_tweak(fun1, series = series1, m = 2, s = 6)
+  # Test with single series using a function that accepts one argument
+  fun_single <- function(x) mean(x)
+  res_single <- TH_tweak(fun_single, series = series1, m = 2, s = 6)
   expect_named(res_single, c("center", "length", "F1"))
+  expect_true(nrow(res_single) > 0)
   
   expect_error(TH_tweak(series = series1), "At least one function must be provided")
   
