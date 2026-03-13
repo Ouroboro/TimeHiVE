@@ -14,7 +14,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/Ouroboro/TimeHiVE/blob/main/inst/CITATION)
+[`inst/CITATION`](https://github.com/Ouroboro/TimeHiVE/blob/v0.2.0/inst/CITATION)
 
 Vladimiro Andrea Boselli, Paolo Tagliolato, Alessandro Oggioni. (2025).
 Time-series Hierarchical Visual Explorer (v0.1.0). Zenodo.
