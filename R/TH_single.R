@@ -136,6 +136,7 @@ TH_single <- function(series, m = NULL, s = NULL, mode = "all", alpha = 0.1) {
   } else {
     mc_cores <- max(1, parallel::detectCores() - 1)
   }
+  mc_cores <- getOption("mc.cores", default = mc_cores)
   
   results_list <- parallel::mclapply(
     1:LEN_MAX,

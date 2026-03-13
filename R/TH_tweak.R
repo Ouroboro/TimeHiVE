@@ -112,6 +112,7 @@ TH_tweak <- function(...,
   } else {
     mc_cores <- max(1, parallel::detectCores() - 1)
   }
+  mc_cores <- getOption("mc.cores", default = mc_cores)
   
   results_list <- parallel::mclapply(
     1:total_windows,
