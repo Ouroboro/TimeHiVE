@@ -107,10 +107,16 @@ TH_tweak <- function(...,
   }
   
   # 7. Parallel execution
+  if (.Platform$OS.type == "windows") {
+    mc_cores <- 1
+  } else {
+    mc_cores <- max(1, parallel::detectCores() - 1)
+  }
+  
   results_list <- parallel::mclapply(
-    1:total_windows,  # Cambiato da LEN_MAX a total_windows
-    compute_window, 
-    mc.cores = parallel::detectCores() - 1
+    1:total_windows,
+    compute_window,
+    mc.cores = mc_cores
   )
   
   # 8. Convert to data frame

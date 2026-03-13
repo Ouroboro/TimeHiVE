@@ -7,20 +7,20 @@
 TH_plotc(results, scale = NULL, output_file = NULL, mask = FALSE, mode = NULL)
 }
 \arguments{
-\item{`results`}{is a \code{data.frame} created by to TH_coupled().}
+\item{results}{is a \code{data.frame} created by to TH_coupled().}
 
-\item{`scale`}{a \code{numeric}, scaling factor for point sizes, autoset by
+\item{scale}{a \code{numeric}, scaling factor for point sizes, autoset by
 default.}
 
-\item{`output_file`}{is a \code{string}, optional, filename to save plot (NULL to
+\item{output_file}{is a \code{string}, optional, filename to save plot (NULL to
 skip saving).}
 
-\item{`mask`}{a \code{logical} value. If TRUE, shows significance in main plots
+\item{mask}{a \code{logical} value. If TRUE, shows significance in main plots
 and hides p-value plots for modes without explicit p-value requests. Only
 applicable for modes: "all", "kendall_with_p", and "pearson_with_p". For
 other modes, a warning is issued and mask is ignored.}
 
-\item{`mode`}{a \code{character} string specifying plots to show:
+\item{mode}{a \code{character} string specifying plots to show:
 "all", "pearson", "kendall", "both", "pearson_with_p", "kendall_with_p".}
 }
 \value{

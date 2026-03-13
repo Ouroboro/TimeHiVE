@@ -11,7 +11,7 @@ Authors@R: c(
     )
 Description: Hierarchical moving-window statistical analysis for time series. A collection of utilities for moving averages, trends, and correlations analysis of time-series, including
     efficient implementations of statistical tests and visualization tools.
-License: GPL-3.0-or-later
+License: GPL (>= 3) + file LICENSE
 URL: https://github.com/Ouroboro/TimeHiVE
 BugReports: https://github.com/Ouroboro/TimeHiVE/issues
 Encoding: UTF-8
@@ -28,4 +28,4 @@ Imports:
 Suggests:
     testthat (>= 3.0.0)
 LazyData: true
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3

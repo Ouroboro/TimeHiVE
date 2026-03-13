@@ -15,23 +15,23 @@ TH_coupled(
 )
 }
 \arguments{
-\item{alternative}{Optional, "two.sided" (Default), "greater", "less".}
+\item{series1}{a \verb{numerical vector} containing NA for missing values.}
 
-\item{`series1`}{a \verb{numerical vector} containing NA for missing values.}
-
-\item{`series2`}{a \verb{numerical vector} containing NA for missing values. It
+\item{series2}{a \verb{numerical vector} containing NA for missing values. It
 must be of the same length of \code{series1}.}
 
-\item{`m`}{a \code{numeric} positive integer, subsampling parameter. Optional
+\item{m}{a \code{numeric} positive integer, subsampling parameter. Optional
 (default: autocalculated).}
 
-\item{`s`}{a \code{numeric} positive integer, cutoff parameters for subseries
+\item{s}{a \code{numeric} positive integer, cutoff parameters for subseries
 legth. Optional (default: autocalculated).}
 
-\item{`mode`}{a \code{character} string specifying the computation mode. One of:
+\item{alpha}{a \code{numeric} significance level for flagging (default: 0.1).}
+
+\item{mode}{a \code{character} string specifying the computation mode. One of:
 "all", "pearson", "kendall", "both", "pearson_with_p", "kendall_with_p".}
 
-\item{`alpha`}{a \code{numeric} significance level for flagging (default: 0.1).}
+\item{alternative}{Optional, "two.sided" (Default), "greater", "less".}
 }
 \value{
 A result \code{data.frame} to pass to TH_plotc() with attributes.

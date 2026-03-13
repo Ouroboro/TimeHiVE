@@ -3,11 +3,11 @@
 #' Plots hierarchical moving-window statistical analysis for custom functions. 
 #' The input is a `data.frame` created by TH_tweak() function.
 #'
-#' @param `results` is a `data.frame` created by TH_tweak().
-#' @param `scale` a `numeric`, scaling factor for point sizes, autoset by default.
-#' @param `output_file` is a `string`, optional, filename to save plot (NULL to skip saving).
-#' @param `colorscales` a `list` of color scales for each function (optional). Can mix predefined names ("avg", "trend", "pval") and custom color vectors.
-#' @param `colorlimits` a `list` of numeric vectors specifying color limits for each function (optional). Each element should be a vector of length 2 (c(min, max)). If NULL, limits are calculated automatically.
+#' @param results is a `data.frame` created by TH_tweak().
+#' @param scale a `numeric`, scaling factor for point sizes, autoset by default.
+#' @param output_file is a `string`, optional, filename to save plot (NULL to skip saving).
+#' @param colorscales a `list` of color scales for each function (optional). Can mix predefined names ("avg", "trend", "pval") and custom color vectors.
+#' @param colorlimits a `list` of numeric vectors specifying color limits for each function (optional). Each element should be a vector of length 2 (c(min, max)). If NULL, limits are calculated automatically.
 #' @return A `gridExtra` arranged plot object.
 #' @export
 #' @import ggplot2

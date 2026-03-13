@@ -5,16 +5,16 @@
 #' correlation coefficient and Mann-Kendall's correlation coefficient. The 
 #' input is a `data.frame` created by TH_coupled() function.
 #'
-#' @param `results` is a `data.frame` created by to TH_coupled().
-#' @param `scale` a `numeric`, scaling factor for point sizes, autoset by 
+#' @param results is a `data.frame` created by to TH_coupled().
+#' @param scale a `numeric`, scaling factor for point sizes, autoset by 
 #' default.
-#' @param `output_file` is a `string`, optional, filename to save plot (NULL to
+#' @param output_file is a `string`, optional, filename to save plot (NULL to
 #' skip saving).
-#' @param `mask` a `logical` value. If TRUE, shows significance in main plots 
+#' @param mask a `logical` value. If TRUE, shows significance in main plots 
 #' and hides p-value plots for modes without explicit p-value requests. Only 
 #' applicable for modes: "all", "kendall_with_p", and "pearson_with_p". For
 #' other modes, a warning is issued and mask is ignored.
-#' @param `mode` a `character` string specifying plots to show: 
+#' @param mode a `character` string specifying plots to show: 
 #' "all", "pearson", "kendall", "both", "pearson_with_p", "kendall_with_p".
 #' @return A `gridExtra` arranged plot object.
 #' @export

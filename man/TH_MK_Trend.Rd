@@ -7,7 +7,7 @@
 TH_MK_Trend(data_series)
 }
 \arguments{
-\item{`data_series`}{a \verb{numerical vector} containing NA for missing values.}
+\item{data_series}{a \verb{numerical vector} containing NA for missing values.}
 }
 \value{
 A list with components:
@@ -18,10 +18,10 @@ A list with components:
 }
 \description{
 Efficient implementation of the Mann-Kendall test for trend detection using
-merge sort algorithm (O(n log^2 n) complexity).
+merge sort algorithm (O(n log n) complexity).
 }
 \examples{
- \dontrun{
+\dontrun{
 data <- c(1.2, 3.4, 2.5, 4.1, 5.6)
 result <- TH_MK_Trend(data)
 }
