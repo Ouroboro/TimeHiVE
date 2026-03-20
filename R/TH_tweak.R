@@ -11,6 +11,7 @@
 #' @return A result `data.frame` to pass to TH_plott() with attributes.
 #' @export
 #' @importFrom parallel mclapply detectCores
+#' @importFrom TimeHiVE TH_MK_Trend TH_MK_Corr
 #' @author Vladimiro Andrea Boselli, (2025) \email{boselli.v@@irea.cnr.it}
 #' @examples
 #'  \dontrun{
@@ -49,6 +50,17 @@ TH_tweak <- function(...,
   # 3. Calculate parameters
   if (is.null(m)) m <- if (n > 250) ceiling(n / 200) else 1
   if (is.null(s)) s <- 6 * m
+  
+  #CHECK
+  min_required_length <- s
+  if (n < min_required_length) {
+    stop(
+      "All series have length (", n, ") which is too short for analysis.\n",
+      "Minimum required length is ", min_required_length, 
+      " (based on s = ", s, ").\n",
+      "Consider reducing m and s parameters, or provide longer time series."
+    )
+  }
   
   # 4. Generate window sequences
   seq_x <- seq(s, n, by = m)

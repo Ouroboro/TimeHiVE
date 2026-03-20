@@ -114,14 +114,17 @@ test_that("TH_coupled basic functionality", {
   expect_false(all(is.na(res_both$V3)))
   expect_false(all(is.na(res_both$V5)))
   
-  # Very short series: provide valid m and s (s <= n) to avoid error in seq()
+  # Very short series: provide valid m and s (s <= n) to avoid length validation error
   short <- 1:5
   res_short <- TH_coupled(short, short, m = 1, s = 3)
   expect_true(nrow(res_short) > 0)
   expect_true(is.numeric(res_short$V3) || all(is.na(res_short$V3)))
   
-  # If m and s are omitted, with n=5 and default s=6 an error occurs (known issue)
-  expect_error(TH_coupled(short, short), "wrong sign in 'by' argument")
+  # When m and s are omitted with n=5, default s=6 triggers length validation error
+  expect_error(
+    TH_coupled(short, short),
+    "Series length \\(5\\) is too short for analysis"
+  )
   
   expect_error(TH_coupled(1:10, 1:5), "Series must have the same length")
   expect_error(TH_coupled(series1, series2, mode = "invalid"), "Invalid mode")
@@ -157,13 +160,16 @@ test_that("TH_single basic functionality", {
   res_na <- TH_single(series_na)
   expect_true(nrow(res_na) > 0)
   
-  # Very short series: provide valid m and s
+  # Very short series: provide valid m and s (s <= n)
   res_short <- TH_single(series_short, m = 1, s = 3)
   expect_true(is.data.frame(res_short))
   
-  # Empty series: currently the function gives an error (not handled)
+  # Empty series triggers length validation error
   empty <- numeric(0)
-  expect_error(TH_single(empty), "wrong sign in 'by' argument")
+  expect_error(
+    TH_single(empty),
+    "Series length \\(0\\) is too short for analysis"
+  )
 })
 
 # ----------------------------------------------------------------------
@@ -191,6 +197,13 @@ test_that("TH_tweak basic functionality", {
   expect_true(nrow(res_single) > 0)
   
   expect_error(TH_tweak(series = series1), "At least one function must be provided")
+  
+  # Test length validation for TH_tweak
+  short_series <- list(rnorm(3), rnorm(3))
+  expect_error(
+    TH_tweak(fun1, series = short_series),
+    "All series have length \\(3\\) which is too short for analysis"
+  )
   
   # Function that errors: we expect NA values (warnings may be suppressed in parallel)
   fun_error <- function(x, y) stop("error")
@@ -315,4 +328,55 @@ test_that("Auto-calculation of m and s works", {
   res_c_long <- TH_coupled(long_series, long_series)
   expect_equal(attr(res_c_long, "m"), 2)
   expect_equal(attr(res_c_long, "s"), 12)
+})
+
+# ----------------------------------------------------------------------
+# Test for length validation (new tests)
+# ----------------------------------------------------------------------
+
+test_that("TH_single fails gracefully with very short series", {
+  short_series <- rnorm(3)
+  
+  # Should get custom error message, not seq() error
+  expect_error(
+    TH_single(short_series),
+    "Series length \\(3\\) is too short for analysis"
+  )
+  
+  # Works with explicit m and s that satisfy the constraint
+  expect_silent(
+    TH_single(short_series, m = 1, s = 3)
+  )
+})
+
+test_that("TH_coupled fails gracefully with very short series", {
+  short_series1 <- rnorm(3)
+  short_series2 <- rnorm(3)
+  
+  # Should get custom error message, not seq() error
+  expect_error(
+    TH_coupled(short_series1, short_series2),
+    "Series length \\(3\\) is too short for analysis"
+  )
+  
+  # Works with explicit m and s that satisfy the constraint
+  expect_silent(
+    TH_coupled(short_series1, short_series2, m = 1, s = 3)
+  )
+})
+
+test_that("TH_tweak fails gracefully with very short series", {
+  short_series <- list(rnorm(3), rnorm(3))
+  fun_test <- function(x, y) mean(x) - mean(y)
+  
+  # Should get custom error message
+  expect_error(
+    TH_tweak(fun_test, series = short_series),
+    "All series have length \\(3\\) which is too short for analysis"
+  )
+  
+  # Works with explicit m and s that satisfy the constraint
+  expect_silent(
+    TH_tweak(fun_test, series = short_series, m = 1, s = 3)
+  )
 })

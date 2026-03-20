@@ -20,6 +20,7 @@
 #' @export
 #' @importFrom parallel mclapply detectCores
 #' @importFrom stats cor.test
+#' @importFrom TimeHiVE TH_MK_Trend TH_MK_Corr
 #' @author Vladimiro Andrea Boselli, (2025) \email{boselli.v@@irea.cnr.it}
 #' @examples
 #'  \dontrun{
@@ -54,6 +55,17 @@ TH_coupled <- function(series1, series2, m = NULL, s = NULL, alpha = 0.1,
   if (length(series1) != length(series2)) stop("Series must have the same length")
   if (is.null(m)) m <- if (n > 250) ceiling(n / 200) else 1
   if (is.null(s)) s <- 6 * m
+  
+  #CHECK
+  min_required_length <- s
+  if (n < min_required_length) {
+    stop(
+      "Series length (", n, ") is too short for analysis.\n",
+      "Minimum required length is ", min_required_length, 
+      " (based on s = ", s, ").\n",
+      "Consider reducing m and s parameters, or provide longer time series."
+    )
+  }
   
   # Sequences calculation
   seq_x <- seq(s, n, by = m)

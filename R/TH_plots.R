@@ -70,11 +70,18 @@ TH_plots <- function(results, scale = NULL, output_file = NULL, mask = FALSE, mo
     )
   
   # Pre-compute color palettes
-  max_abs_V5 <- max(abs(results$V5), na.rm = TRUE)
-  CV <- if (max_abs_V5 > 0) {
-    ceiling(max_abs_V5 / (10 ^ floor(log10(max_abs_V5)))) * (10 ^ floor(log10(max_abs_V5)))
+  # Check if V5 has any non-NA values
+  if (all(is.na(results$V5))) {
+    # No trend data available (e.g., avg_only mode)
+    max_abs_V5 <- 0
+    CV <- 1
   } else {
-    1  # Default value if no variation
+    max_abs_V5 <- max(abs(results$V5), na.rm = TRUE)
+    if (is.finite(max_abs_V5) && max_abs_V5 > 0) {
+      CV <- ceiling(max_abs_V5 / (10 ^ floor(log10(max_abs_V5)))) * (10 ^ floor(log10(max_abs_V5)))
+    } else {
+      CV <- 1  # Default value if no variation
+    }
   }
   
   color_palettes <- list(
