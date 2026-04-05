@@ -62,23 +62,28 @@ TH_tweak <- function(...,
     )
   }
   
-  # 4. Generate window sequences
+  # 4. Generate window sequences (lengths)
   seq_x <- seq(s, n, by = m)
   
-  # Calculate exact number of windows
+  # Pre-allocate with safe upper bound
+  # We'll compute total_windows correctly without forcing integer centers
   total_windows <- 0
   for (len in seq_x) {
-    centers <- seq(from = max(len / 2, 1), to = min(n - len / 2, n), by = m)
+    from <- len / 2
+    to <- n - len / 2
+    centers <- seq(from = from, to = to, by = m)
     total_windows <- total_windows + length(centers)
   }
   
   x_values <- numeric(total_windows)
   y_values <- numeric(total_windows)
   
-  # 5. Populate window coordinates
+  # 5. Populate window coordinates (allow fractional centers)
   index <- 1
   for (len in seq_x) {
-    centers <- seq(from = max(len / 2, 1), to = min(n - len / 2, n), by = m)
+    from <- len / 2
+    to <- n - len / 2
+    centers <- seq(from = from, to = to, by = m)
     for (center in centers) {
       x_values[index] <- center
       y_values[index] <- len

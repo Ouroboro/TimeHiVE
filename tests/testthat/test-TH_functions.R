@@ -1,7 +1,7 @@
 # tests/testthat/test-TH_functions.R
 
 library(testthat)
-library(ggplot2)
+#library(ggplot2)
 library(gridExtra)
 
 # ----------------------------------------------------------------------

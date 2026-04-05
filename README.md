@@ -17,16 +17,58 @@ TimeHiVE provides efficient R functions for hierarchical moving-window analysis 
 The software package here proposed allows to perform analyses on time series avoiding the arbitrary choice of the time window and allowing to appreciate the whole spectrum of possible results offered by this kind of statistical tools.
 
 ![Original Time Series](img/Fig1.png)
-*Figure 1: Different Moving Average vs Original Syntetic Time Series. Color scale on y-axis is meant only to match colors in Fig. 2*
+*Figure 1: Different Moving Average vs Original Syntetic Time Series. Color scale on y-axis is meant only to match colors in Fig. 2. Source in inst/extdata/original.csv .*
 
 ![TimeHiVE Moving Average](img/Fig2.png)
-*Figure 2: Representation of all the possible moving averages for the Original Syntetic Time Series, moving averages analyses represented in Fig. 1 are highlighted with comments on the results.*
+*Figure 2: Representation of all the possible moving averages for the Original Syntetic Time Series, moving averages analyses represented in Fig. 1 are highlighted with comments on the results. Source in inst/extdata/original.csv .*
+
+```r
+library(TimeHiVE)
+
+# Load example time series from the package data
+series <- read.csv(system.file("extdata", "original.csv", package = "TimeHiVE"),
+                    header = FALSE)[, 1]
+
+# Perform analysis
+results <- TH_single(
+  series = series,
+  m = 1,
+  s = 1,
+  mode = "avg"
+)
+
+# Visualize results
+TH_plotc(results, mode = "avg")
+```
 
 ![Original Coupled Series](img/Fig3.png)
-*Figure 3: Representation of two Time Series positively correlated for short periods but negatively correlated for long periods. The series are built as: `TS1 = 40 + 2*sin(t/2) - t/20 - rand(-2/3, 2/3)` and `TS2 = 15 + 2*sin(t/2) + t/7 - rand(-2/3, 2/3)`. The sine component creates short-term positive correlation, while the `t/n` terms drive long-term negative correlation.*
+*Figure 3: Representation of two Time Series positively correlated for short periods but negatively correlated for long periods. The series are built as: `TS1 = 40 + 2*sin(t/2) - t/20 - rand(-2/3, 2/3)` and `TS2 = 15 + 2*sin(t/2) + t/7 - rand(-2/3, 2/3)`. The sine component creates short-term positive correlation, while the `t/n` terms drive long-term negative correlation. Source in inst/extdata/fseries1.csv and inst/extdata/fseries2.csv .*
 
 ![Original Time Series](img/Fig4.png)
-*Figure 4: Here we show the Moving Correlation Analysis for the coupled Time Series represented in Fig. 4, the first row shows the results for Pearson’s correlation coefficient (Top Left) and relative p-values (Top Right), the second row shows the same analysis with MK’s correlation coefficients (Bottom Left) and relative p-values (Bottom Right). The inversion of the correlation between short and long period of analysis is quite clear.*
+*Figure 4: Here we show the Moving Correlation Analysis for the coupled Time Series represented in Fig. 4, the first row shows the results for Pearson’s correlation coefficient (Top Left) and relative p-values (Top Right), the second row shows the same analysis with MK’s correlation coefficients (Bottom Left) and relative p-values (Bottom Right). The inversion of the correlation between short and long period of analysis is quite clear. Source in inst/extdata/fseries1.csv and inst/extdata/fseries2.csv .*
+
+```r
+library(TimeHiVE)
+
+# Load example time series from the package data
+series1 <- read.csv(system.file("extdata", "fseries1.csv", package = "TimeHiVE"),
+                    header = FALSE)[, 1]
+series2 <- read.csv(system.file("extdata", "fseries2.csv", package = "TimeHiVE"),
+                    header = FALSE)[, 1]
+
+# Perform analysis
+results <- TH_coupled(
+  series1 = series1,
+  series2 = series2,
+  m = 2,
+  s = 6,
+  alpha = 0.05,
+  mode = "both"
+)
+
+# Visualize results
+TH_plotc(results, mask = FALSE, mode = "all")
+```
 
 FIRST ROW: Pearson’s correlation coefficient (Top Left) and relative p-values (Top Right).
 SECOND ROW: same analysis with MK’s correlation coefficientes (Bottom Left) and relative p-values (Bottom Right). The inversion of the correlation between short and long period of analysis is quite clear.
@@ -43,13 +85,17 @@ remotes::install_github("Ouroboro/TimeHiVE")
 ## Usage
 
 ### Basic Example
+
+The package includes example data files in `inst/extdata/`. After installation, you can load them using `system.file()`.
+
 ```r
 library(TimeHiVE)
 
-# Generate example data
-set.seed(123)
-series1 <- sin(seq(0, 4*pi, length.out = 200)) + rnorm(200, sd = 0.2)
-series2 <- cos(seq(0, 4*pi, length.out = 200)) + rnorm(200, sd = 0.3)
+# Load example time series from the package data
+series1 <- read.csv(system.file("extdata", "series1.csv", package = "TimeHiVE"),
+                    header = FALSE)[, 1]
+series2 <- read.csv(system.file("extdata", "series2.csv", package = "TimeHiVE"),
+                    header = FALSE)[, 1]
 
 # Perform analysis
 results <- TH_coupled(
@@ -62,15 +108,15 @@ results <- TH_coupled(
 )
 
 # Visualize results
-TH_plotc(results, mask = TRUE, mode = "both")
+TH_plotc(results, mask = TRUE, mode = "all")
 ```
 
 ### Advanced Usage
 
 For functions `TH_plots` and `TH_plotc`, you can use significance values to mask the output of statistical tests depending on the value you chose previously.
 
-```
-results2 <- TH_coupled(series1, series2)
+```r
+results2 <- TH_coupled(series1, series2)   # using the same series1, series2 loaded above
 
 Fig5 <- "Fig5.png"
 Fig6 <- "Fig6.png"
@@ -86,7 +132,7 @@ p <- TH_plotc(results2, output_file = Fig6, mask = TRUE)
 
 If the moving-window statistical analyses proposed by the previous functions are not sufficient, functions `TH_tweak()` and `TH_plott()` allow you to use custom functions and possibly customize the color scales and tile intervals during the display phase. An exhaustive example follows shortly.
 
-```
+```r
 ### START Customized Functions ###
 
 harmean_fun <- function(series) {
@@ -117,12 +163,16 @@ skew_fun <- function(series) {
 
 ### END Customized Functions ###
 
+# Load a single series for the tweak example
+single_series <- read.csv(system.file("extdata", "tweak_series.csv", package = "TimeHiVE"),
+                          header = FALSE)[, 1]
+
 results <- TH_tweak(
   harmean_fun,
   mean_fun,
   diffmean_fun,
   skew_fun,
-  series = list(data),
+  series = list(single_series),
   param = 0.05
 )
 
@@ -153,7 +203,7 @@ p <- TH_plott(results, output_file = Fig7,
 ![Single Series Tweak](img/Fig7.png)
 *Output for Fig. 7 single series tweak.*
 
-```
+```r
 ### START Customized Functions ###
 
 pearson_fun <- function(x, y) cor.test(x, y, method = "pearson")$estimate
@@ -174,11 +224,17 @@ sqrmean_fun <- function(serie1, serie2, na.rm = TRUE) {
 
 ### END Customized Functions ###
 
+# Load two coupled series for the tweak example
+coupled1 <- read.csv(system.file("extdata", "tweak_series1.csv", package = "TimeHiVE"),
+                     header = FALSE)[, 1]
+coupled2 <- read.csv(system.file("extdata", "tweak_series2.csv", package = "TimeHiVE"),
+                     header = FALSE)[, 1]
+
 results <- TH_tweak(
   pearson_fun,
   diffmax_fun,
   sqrmean_fun,
-  series = list(sdata, sdata2),
+  series = list(coupled1, coupled2),
   param = 0.05
 )
 
@@ -187,12 +243,10 @@ p <- TH_plott(results, output_file = Fig8,
 colorscales = list(c("blue", "white", "red"),
                    c("green", "yellow", "purple"),
                    "avg"))
-
 ```
 
 ![Coupled Series Tweak](img/Fig8.png)
 *Output for Fig. 8 coupled series tweak.*
-
 
 ### Main Functions
 
@@ -204,7 +258,6 @@ colorscales = list(c("blue", "white", "red"),
 - `TH_plott()`: Visualize analysis results from `TH_tweak()`, no masking.
 - `TH_MK_Trend()`: Mann-Kendall trend test
 - `TH_MK_Corr()`: Mann-Kendall correlation test
-
 
 ## Documentation
 
