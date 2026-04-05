@@ -17,12 +17,31 @@ of statistical tools.
 
 ![Original Time Series](img/Fig1.png)*Figure 1: Different Moving Average
 vs Original Syntetic Time Series. Color scale on y-axis is meant only to
-match colors in Fig. 2*
+match colors in Fig. 2. Source in inst/extdata/original.csv .*
 
 ![TimeHiVE Moving Average](img/Fig2.png)*Figure 2: Representation of all
 the possible moving averages for the Original Syntetic Time Series,
 moving averages analyses represented in Fig. 1 are highlighted with
-comments on the results.*
+comments on the results. Source in inst/extdata/original.csv .*
+
+``` r
+library(TimeHiVE)
+
+# Load example time series from the package data
+series <- read.csv(system.file("extdata", "original.csv", package = "TimeHiVE"),
+                    header = FALSE)[, 1]
+
+# Perform analysis
+results <- TH_single(
+  series = series,
+  m = 1,
+  s = 1,
+  mode = "avg"
+)
+
+# Visualize results
+TH_plotc(results, mode = "avg")
+```
 
 ![Original Coupled Series](img/Fig3.png)*Figure 3: Representation of two
 Time Series positively correlated for short periods but negatively
@@ -30,7 +49,8 @@ correlated for long periods. The series are built as:
 `TS1 = 40 + 2*sin(t/2) - t/20 - rand(-2/3, 2/3)` and
 `TS2 = 15 + 2*sin(t/2) + t/7 - rand(-2/3, 2/3)`. The sine component
 creates short-term positive correlation, while the `t/n` terms drive
-long-term negative correlation.*
+long-term negative correlation. Source in inst/extdata/fseries1.csv and
+inst/extdata/fseries2.csv .*
 
 ![Original Time Series](img/Fig4.png)*Figure 4: Here we show the Moving
 Correlation Analysis for the coupled Time Series represented in Fig. 4,
@@ -38,7 +58,31 @@ the first row shows the results for Pearson’s correlation coefficient
 (Top Left) and relative p-values (Top Right), the second row shows the
 same analysis with MK’s correlation coefficients (Bottom Left) and
 relative p-values (Bottom Right). The inversion of the correlation
-between short and long period of analysis is quite clear.*
+between short and long period of analysis is quite clear. Source in
+inst/extdata/fseries1.csv and inst/extdata/fseries2.csv .*
+
+``` r
+library(TimeHiVE)
+
+# Load example time series from the package data
+series1 <- read.csv(system.file("extdata", "fseries1.csv", package = "TimeHiVE"),
+                    header = FALSE)[, 1]
+series2 <- read.csv(system.file("extdata", "fseries2.csv", package = "TimeHiVE"),
+                    header = FALSE)[, 1]
+
+# Perform analysis
+results <- TH_coupled(
+  series1 = series1,
+  series2 = series2,
+  m = 2,
+  s = 6,
+  alpha = 0.05,
+  mode = "both"
+)
+
+# Visualize results
+TH_plotc(results, mask = FALSE, mode = "all")
+```
 
 FIRST ROW: Pearson’s correlation coefficient (Top Left) and relative
 p-values (Top Right). SECOND ROW: same analysis with MK’s correlation
@@ -59,13 +103,18 @@ remotes::install_github("Ouroboro/TimeHiVE")
 
 ### Basic Example
 
+The package includes example data files in `inst/extdata/`. After
+installation, you can load them using
+[`system.file()`](https://rdrr.io/r/base/system.file.html).
+
 ``` r
 library(TimeHiVE)
 
-# Generate example data
-set.seed(123)
-series1 <- sin(seq(0, 4*pi, length.out = 200)) + rnorm(200, sd = 0.2)
-series2 <- cos(seq(0, 4*pi, length.out = 200)) + rnorm(200, sd = 0.3)
+# Load example time series from the package data
+series1 <- read.csv(system.file("extdata", "series1.csv", package = "TimeHiVE"),
+                    header = FALSE)[, 1]
+series2 <- read.csv(system.file("extdata", "series2.csv", package = "TimeHiVE"),
+                    header = FALSE)[, 1]
 
 # Perform analysis
 results <- TH_coupled(
@@ -78,7 +127,7 @@ results <- TH_coupled(
 )
 
 # Visualize results
-TH_plotc(results, mask = TRUE, mode = "both")
+TH_plotc(results, mask = TRUE, mode = "all")
 ```
 
 ### Advanced Usage
@@ -87,12 +136,14 @@ For functions `TH_plots` and `TH_plotc`, you can use significance values
 to mask the output of statistical tests depending on the value you chose
 previously.
 
-    results2 <- TH_coupled(series1, series2)
+``` r
+results2 <- TH_coupled(series1, series2)   # using the same series1, series2 loaded above
 
-    Fig5 <- "Fig5.png"
-    Fig6 <- "Fig6.png"
-    p <- TH_plotc(results2, output_file = Fig5)
-    p <- TH_plotc(results2, output_file = Fig6, mask = TRUE)
+Fig5 <- "Fig5.png"
+Fig6 <- "Fig6.png"
+p <- TH_plotc(results2, output_file = Fig5)
+p <- TH_plotc(results2, output_file = Fig6, mask = TRUE)
+```
 
 ![Unmasked](img/Fig5.png)*Output for Fig. 5 unmasked.*
 
@@ -107,104 +158,118 @@ allow you to use custom functions and possibly customize the color
 scales and tile intervals during the display phase. An exhaustive
 example follows shortly.
 
-    ### START Customized Functions ###
+``` r
+### START Customized Functions ###
 
-    harmean_fun <- function(series) {
-      series <- series[!is.na(series)]
-      n <- length(series)
-      sol <- n / sum(1/series, na.rm = TRUE)
-      return(sol)
-    }
+harmean_fun <- function(series) {
+  series <- series[!is.na(series)]
+  n <- length(series)
+  sol <- n / sum(1/series, na.rm = TRUE)
+  return(sol)
+}
 
-    mean_fun <- function(x) mean(x)
+mean_fun <- function(x) mean(x)
 
-    diffmean_fun <- function(series) {
-      series <- series[!is.na(series)]
-      x <- harmean_fun(series)
-      y <- mean_fun(series)
-      sol <- x-y
-      return(sol)
-    }
+diffmean_fun <- function(series) {
+  series <- series[!is.na(series)]
+  x <- harmean_fun(series)
+  y <- mean_fun(series)
+  sol <- x-y
+  return(sol)
+}
 
-    skew_fun <- function(series) {
-      series <- series[!is.na(series)]
-      n <- length(series)
-      avg <- mean(series)
-      sd_camp <- sd(series)
-      sol <- sum((series - avg)^3 / (sd_camp^3)) / n
-      return(sol)
-    }
+skew_fun <- function(series) {
+  series <- series[!is.na(series)]
+  n <- length(series)
+  avg <- mean(series)
+  sd_camp <- sd(series)
+  sol <- sum((series - avg)^3 / (sd_camp^3)) / n
+  return(sol)
+}
 
-    ### END Customized Functions ###
+### END Customized Functions ###
 
-    results <- TH_tweak(
-      harmean_fun,
-      mean_fun,
-      diffmean_fun,
-      skew_fun,
-      series = list(data),
-      param = 0.05
-    )
+# Load a single series for the tweak example
+single_series <- read.csv(system.file("extdata", "tweak_series.csv", package = "TimeHiVE"),
+                          header = FALSE)[, 1]
 
-    ### START Customized Color Palette ###
+results <- TH_tweak(
+  harmean_fun,
+  mean_fun,
+  diffmean_fun,
+  skew_fun,
+  series = list(single_series),
+  param = 0.05
+)
 
-    skew = {
-      neg <- colorRampPalette(c("green4", "green"))(33)
-      pos <- colorRampPalette(c("magenta", "magenta4"))(33)
-      c(neg, "white", pos)
-    }
+### START Customized Color Palette ###
 
-    ### END Customized Color Palette ###
+skew = {
+  neg <- colorRampPalette(c("green4", "green"))(33)
+  pos <- colorRampPalette(c("magenta", "magenta4"))(33)
+  c(neg, "white", pos)
+}
 
-    Fig7 <- "Fig7.png"
-    p <- TH_plott(results, output_file = Fig7,
-                  colorscales = list(
-                    "avg",
-                    "avg",
-                    c("magenta", "purple", "blue", "cyan", "white"),
-                    skew),
-                  colorlimits = list(
-                    c(0, 35),
-                    c(0, 35),
-                    NULL,
-                    NULL))
+### END Customized Color Palette ###
+
+Fig7 <- "Fig7.png"
+p <- TH_plott(results, output_file = Fig7, 
+              colorscales = list(
+                "avg",
+                "avg",
+                c("magenta", "purple", "blue", "cyan", "white"),
+                skew),
+              colorlimits = list(
+                c(0, 35),
+                c(0, 35),
+                NULL,
+                NULL))
+```
 
 ![Single Series Tweak](img/Fig7.png)*Output for Fig. 7 single series
 tweak.*
 
-    ### START Customized Functions ###
+``` r
+### START Customized Functions ###
 
-    pearson_fun <- function(x, y) cor.test(x, y, method = "pearson")$estimate
+pearson_fun <- function(x, y) cor.test(x, y, method = "pearson")$estimate
 
-    diffmax_fun <- function(serie1, serie2, na.rm = TRUE) {
-      max1 <- sum(serie1, na.rm = na.rm)
-      max2 <- sum(serie2, na.rm = na.rm)
-      sol <- (max1-max2)
-      return(sol)
-    }
+diffmax_fun <- function(serie1, serie2, na.rm = TRUE) {
+  max1 <- sum(serie1, na.rm = na.rm)
+  max2 <- sum(serie2, na.rm = na.rm)
+  sol <- (max1-max2)
+  return(sol)
+}
 
-    sqrmean_fun <- function(serie1, serie2, na.rm = TRUE) {
-      x <- sum(serie1, na.rm = na.rm)
-      y <- sum(serie2, na.rm = na.rm)
-      sol <- sqrt(sqrt((x*y)^4))
-      return(sol)
-    }
+sqrmean_fun <- function(serie1, serie2, na.rm = TRUE) {
+  x <- sum(serie1, na.rm = na.rm)
+  y <- sum(serie2, na.rm = na.rm)
+  sol <- sqrt(sqrt((x*y)^4))
+  return(sol)
+}
 
-    ### END Customized Functions ###
+### END Customized Functions ###
 
-    results <- TH_tweak(
-      pearson_fun,
-      diffmax_fun,
-      sqrmean_fun,
-      series = list(sdata, sdata2),
-      param = 0.05
-    )
+# Load two coupled series for the tweak example
+coupled1 <- read.csv(system.file("extdata", "tweak_series1.csv", package = "TimeHiVE"),
+                     header = FALSE)[, 1]
+coupled2 <- read.csv(system.file("extdata", "tweak_series2.csv", package = "TimeHiVE"),
+                     header = FALSE)[, 1]
 
-    Fig8 <- "Fig8.png"
-    p <- TH_plott(results, output_file = Fig8,
-    colorscales = list(c("blue", "white", "red"),
-                       c("green", "yellow", "purple"),
-                       "avg"))
+results <- TH_tweak(
+  pearson_fun,
+  diffmax_fun,
+  sqrmean_fun,
+  series = list(coupled1, coupled2),
+  param = 0.05
+)
+
+Fig8 <- "Fig8.png"
+p <- TH_plott(results, output_file = Fig8, 
+colorscales = list(c("blue", "white", "red"),
+                   c("green", "yellow", "purple"),
+                   "avg"))
+```
 
 ![Coupled Series Tweak](img/Fig8.png)*Output for Fig. 8 coupled series
 tweak.*
