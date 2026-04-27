@@ -84,15 +84,15 @@ In this section we give a visual example for a single time series and a visual e
 
 # Software design
 
-TimeHiVE adopts a **hierarchical moving‑window** design: instead of a single window size, it computes statistics for **every possible window length** (from 1 to \( N \)), creating a 2D output space (time vs. window size). This exhaustive approach eliminates the need for *a priori* window selection.
+TimeHiVE adopts a **hierarchical moving‑window** design: instead of a single window size, it computes statistics for **every possible window length** (from 1 to $N$), creating a 2D output space (time vs. window size). This exhaustive approach eliminates the need for *a priori* window selection.
 
 ## Key design choices
 
-1. **Incremental computation** – For mean and variance, windows are updated in \( O(1) \) by adding one new observation and removing the oldest. Mann‑Kendall (MK) trend and correlation use \( O(N \log N) \) algorithms [@Kni1966; @Chr2005] based on precomputed ranks.
+1. **Incremental computation** – For mean and variance, windows are updated in ($O(1)$) by adding one new observation and removing the oldest. Mann‑Kendall (MK) trend and correlation use $O(N \log N)$ algorithms [@Kni1966; @Chr2005] based on precomputed ranks.
 
 2. **Parallel execution** – On Unix‑like systems, `parallel::mclapply()` distributes work across window sizes, scaling almost linearly with CPU cores. Windows systems fall back to sequential execution.
 
-3. **Extensibility** – `TH_tweak()` allows users to supply custom R functions (vector to scalar) that are applied to every window, reusing the hierarchical framework and parallel backend.
+3. **Extensibility** – `TH_tweak()` allows users to supply custom R functions (vector → scalar) that are applied to every window, reusing the hierarchical framework and parallel backend.
 
 4. **Visualisation‑first output** – Results are returned as matrices (time × window size) and directly consumed by `TH_plots()`, `TH_plotc()`, and `TH_plott()`, which produce heatmaps with time on the x‑axis and window size on the y‑axis [@Bru2006; @Bru2009].
 
@@ -100,7 +100,7 @@ TimeHiVE adopts a **hierarchical moving‑window** design: instead of a single w
 
 ## Performance note
 
-On an 8‑core workstation, a full hierarchical MK trend for a 1000‑point series takes ~12 seconds (coupled analysis ~22 seconds). Performance scales quadratically with series length; parallelisation is recommended for >5000 points.
+On an 8‑core workstation, a full hierarchical MK trend for a 1000‑point series takes ≈12 seconds (coupled analysis ≈22 seconds). Performance scales quadratically with series length; parallelisation is recommended for >5000 points.
 
 # AI usage disclosure
 
