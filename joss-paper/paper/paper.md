@@ -19,8 +19,6 @@ tags:
   - moving-window statistics
   - Mann-Kendall
   - correlation
-abstract: |
-  TimeHiVE is an R package designed for hierarchical moving-window statistical analysis of time series data. The package addresses a fundamental challenge in time series analysis: the selection of appropriate window sizes for moving-window calculations. Traditional moving-window approaches require users to specify a fixed window size, which can obscure important patterns if chosen inappropriately. TimeHiVE eliminates this constraint by systematically computing statistics across all possible window sizes, enabling researchers to explore the full spectrum of temporal patterns in their data.
 bibliography: paper.bib
 ---
 # Summary
