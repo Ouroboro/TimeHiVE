@@ -17,12 +17,12 @@ Source:
 [`inst/CITATION`](https://github.com/Ouroboro/TimeHiVE/blob/main/inst/CITATION)
 
 Vladimiro Andrea Boselli, Paolo Tagliolato, Alessandro Oggioni. (2025).
-Time-series Hierarchical Visual Explorer (v0.1.0). Zenodo.
+Time-series Hierarchical Visual Explorer (v0.2.3). Zenodo.
 https://doi.org/10.5281/zenodo.15697261
 
     @Misc{,
       title = {Time-series Hierarchical Visual Explorer},
       author = {Vladimiro Andrea Boselli and Paolo Tagliolato and Alessandro Oggioni},
       year = {2025},
-      note = {R package version v0.1.0},
+      note = {R package version v0.2.3},
     }
