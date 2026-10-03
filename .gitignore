@@ -39,4 +39,5 @@ rsconnect/
 example_bloks/
 EnvDataShow.Rproj
 .Rbuildignore
+.Rproj.user/
 docs
