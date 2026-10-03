@@ -25,6 +25,7 @@ moving averages analyses represented in Fig. 1 are highlighted with
 comments on the results. Source in inst/extdata/original.csv .*
 
 ``` r
+
 library(TimeHiVE)
 
 # Load example time series from the package data
@@ -36,11 +37,11 @@ results <- TH_single(
   series = series,
   m = 1,
   s = 1,
-  mode = "avg"
+  mode = "avg_only"
 )
 
 # Visualize results
-TH_plotc(results, mode = "avg")
+TH_plots(results)
 ```
 
 ![Original Coupled Series](img/Fig3.png)*Figure 3: Representation of two
@@ -62,6 +63,7 @@ between short and long period of analysis is quite clear. Source in
 inst/extdata/fseries1.csv and inst/extdata/fseries2.csv .*
 
 ``` r
+
 library(TimeHiVE)
 
 # Load example time series from the package data
@@ -95,6 +97,7 @@ is quite clear.
 You can install the development version from GitHub with:
 
 ``` r
+
 # install.packages("remotes")
 remotes::install_github("Ouroboro/TimeHiVE")
 ```
@@ -108,6 +111,7 @@ installation, you can load them using
 [`system.file()`](https://rdrr.io/r/base/system.file.html).
 
 ``` r
+
 library(TimeHiVE)
 
 # Load example time series from the package data
@@ -137,6 +141,7 @@ to mask the output of statistical tests depending on the value you chose
 previously.
 
 ``` r
+
 results2 <- TH_coupled(series1, series2)   # using the same series1, series2 loaded above
 
 Fig5 <- "Fig5.png"
@@ -159,6 +164,7 @@ scales and tile intervals during the display phase. An exhaustive
 example follows shortly.
 
 ``` r
+
 ### START Customized Functions ###
 
 harmean_fun <- function(series) {
@@ -230,6 +236,7 @@ p <- TH_plott(results, output_file = Fig7,
 tweak.*
 
 ``` r
+
 ### START Customized Functions ###
 
 pearson_fun <- function(x, y) cor.test(x, y, method = "pearson")$estimate
@@ -303,6 +310,7 @@ tweak.*
 For detailed documentation see:
 
 ``` r
+
 ?TH_single
 ?TH_coupled
 ?TH_tweak
