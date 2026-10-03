@@ -123,7 +123,7 @@ TH_MK_Trend <- function(data_series) {
     Z <- 0
   }
   
-  p.value <- 0.5 - abs(0.5 - pnorm(Z))
+  p.value <- 2 * pnorm(-abs(Z))
   
   return(list(S = S, Var.S = VarS, Z = Z, p.value = p.value))
 }

@@ -34,11 +34,11 @@ results <- TH_single(
   series = series,
   m = 1,
   s = 1,
-  mode = "avg"
+  mode = "avg_only"
 )
 
 # Visualize results
-TH_plotc(results, mode = "avg")
+TH_plots(results)
 ```
 
 ![Original Coupled Series](img/Fig3.png)

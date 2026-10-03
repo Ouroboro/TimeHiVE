@@ -46,7 +46,7 @@ test_that("TH_MK_Trend works correctly", {
   x <- rep(1, 10)
   res <- TH_MK_Trend(x)
   expect_equal(res$S, 0)
-  expect_equal(res$p.value, 0.5)
+  expect_equal(res$p.value, 1)
   
   x <- c(1,2,NA,4,5)
   res <- TH_MK_Trend(x)
